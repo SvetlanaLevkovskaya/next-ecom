@@ -2,9 +2,9 @@ import Image from 'next/image'
 
 export const Header = () => {
   return (
-    <header className="sticky top-0 z-10 border-b border-zinc-200 py-5 ">
-      <div className="flex items-center justify-between gap-2  max-w-[932px] px-2 md:mx-auto">
-        <div className="flex items-center gap-x-36">
+    <header className="sticky top-0 z-10 border-b border-zinc-200 py-3">
+      <div className="flex items-center justify-between gap-4 max-w-[932px] px-2 mx-auto">
+        <div className="flex items-center gap-x-28">
           <Image
             height={0}
             width={0}
@@ -16,9 +16,9 @@ export const Header = () => {
             className="hidden md:block"
           />
 
-          <div className="relative  w-[428px]">
+          <div className="relative max-w-[428px]">
             <input
-              className="w-full border border-zinc-300 focus:border-blue-500 transition-colors duration-200 ease-in-out py-2 pl-6 pr-4 rounded-lg text-sm placeholder-gray-500 outline-none"
+              className="w-[300px] sm:w-[428px] border border-zinc-300 focus:border-blue-500 transition-colors duration-200 ease-in-out p-4 pl-6 rounded-lg text-sm placeholder-gray-500 outline-none"
               placeholder="Search"
             />
             <Image
@@ -39,12 +39,12 @@ export const Header = () => {
             height={0}
             width={0}
             style={{ height: '20px', width: '20px' }}
-            alt={'logo'}
+            alt={'favorite'}
             src="/favorite.svg"
             priority
             unoptimized
           />
-          <span className="text-sm text-gray-700">Favorite</span>
+          <span className="hidden md:block text-sm text-gray-700">Favorite</span>
         </div>
       </div>
     </header>
