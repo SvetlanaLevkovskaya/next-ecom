@@ -11,7 +11,7 @@ export const ProductCard = ({ product }: { product: Products }) => {
   return (
     <Link
       href={`/product/${product.id}`}
-      className="relative  flex flex-col justify-between border p-4 gap-2.5"
+      className="relative flex flex-col justify-between p-4 gap-2.5 border border-slate-200"
     >
       <p className="text-sm text-gray-500">{product.category}</p>
       <h3 className="text-sm font-medium  min-h-10">{displayedTitle}</h3>

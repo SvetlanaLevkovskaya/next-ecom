@@ -34,9 +34,9 @@ export const ProductList = ({ products }: { products: Products[] }) => {
   if (!sortedProducts.length) return null
 
   return (
-    <div className="flex flex-col md:flex-row  gap-y-2.5 max-w-[946px] px-2 my-8 md:mx-auto">
+    <div className="flex flex-col md:flex-row gap-y-2.5 max-w-[946px] my-6 md:mx-auto">
       <div className="w-[241px]">
-        <h2 className="text-lg font-medium mb-2">Filters:</h2>
+        <h2 className="text-xl font-medium mb-8">Filters</h2>
         {categories.map((category) => (
           <div key={category} className="flex items-center mb-2">
             <input
@@ -45,7 +45,7 @@ export const ProductList = ({ products }: { products: Products[] }) => {
               id={category}
               onChange={handleCategoryChange}
               checked={selectedCategories.includes(category)}
-              className="mr-2"
+              className="mr-2 h-3 w-3 accent-yellow-500  focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500"
             />
             <label htmlFor={category} className="text-sm">
               {category}
@@ -62,7 +62,7 @@ export const ProductList = ({ products }: { products: Products[] }) => {
           <option value="desc">Price Down</option>
         </select>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 w-[705px] mt-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 mt-4 border-collapse border border-slate-100">
           {sortedProducts.map((product) => (
             <ProductCard key={product.id} product={product} />
           ))}

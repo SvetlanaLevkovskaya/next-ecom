@@ -2,7 +2,7 @@ import Link from 'next/link'
 
 export const SubHeader = () => {
   return (
-    <nav className="border-b border-zinc-200 py-4 w-full">
+    <nav className="border-b border-slate-200 py-4 w-full">
       <div className="flex gap-8 text-sm max-w-[932px] mx-auto px-4">
         <Link
           href="/"

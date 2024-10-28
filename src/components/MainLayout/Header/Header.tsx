@@ -2,7 +2,7 @@ import Image from 'next/image'
 
 export const Header = () => {
   return (
-    <header className="sticky top-0 z-10 border-b border-zinc-200 py-3">
+    <header className="sticky top-0 z-10 bg-white border-b border-slate-200 py-3">
       <div className="flex items-center justify-between gap-4 max-w-[932px] px-2 mx-auto">
         <div className="flex items-center gap-x-28">
           <Image
@@ -18,7 +18,7 @@ export const Header = () => {
 
           <div className="relative max-w-[428px]">
             <input
-              className="w-[300px] sm:w-[428px] border border-zinc-300 focus:border-blue-500 transition-colors duration-200 ease-in-out p-4 pl-6 rounded-lg text-sm placeholder-gray-500 outline-none"
+              className="w-[300px] sm:w-[428px] border border-slate-200 focus:border-amber-500 transition-colors duration-200 ease-in-out p-4 pl-6 rounded-lg text-sm placeholder-gray-500 outline-none"
               placeholder="Search"
             />
             <Image
