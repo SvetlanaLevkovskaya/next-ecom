@@ -1,7 +1,10 @@
+import { Suspense } from 'react'
+
 import type { Metadata } from 'next'
 import { Manrope } from 'next/font/google'
 
 import { MainLayout } from '@/components/MainLayout/MainLayout'
+import { Spinner } from '@/components/Spinner/Spinner'
 
 import './globals.css'
 
@@ -20,7 +23,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={manrope.className}>
-        <MainLayout>{children}</MainLayout>
+        <Suspense fallback={<Spinner />}>
+          <MainLayout>{children}</MainLayout>
+        </Suspense>
       </body>
     </html>
   )

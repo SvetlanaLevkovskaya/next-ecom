@@ -1,3 +1,9 @@
-export default function Home() {
-  return <main className="flex min-h-screen flex-col items-center justify-between p-24"></main>
+import { getProducts } from '@/services/clientApi'
+
+import { ProductList } from '@/app/_ui/ProductList'
+
+export default async function Home() {
+  const products = await getProducts()
+
+  return <ProductList products={products} />
 }

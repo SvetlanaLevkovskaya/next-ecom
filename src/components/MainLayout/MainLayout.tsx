@@ -7,7 +7,7 @@ export const MainLayout = ({ children }: { children: React.ReactNode }) => {
     <div className="flex flex-col h-dvh mx-auto">
       <Header />
       <SubHeader />
-      <main className="flex flex-col flex-grow overflow-hidden">{children}</main>
+      <main className="flex flex-col flex-grow">{children}</main>
       <Footer />
     </div>
   )
