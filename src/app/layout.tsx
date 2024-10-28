@@ -13,6 +13,11 @@ const manrope = Manrope({ subsets: ['latin'] })
 export const metadata: Metadata = {
   title: 'E-comm',
   description: 'E-commerce App',
+  twitter: {
+    title: 'E-comm',
+    description: 'E-commerce App',
+    images: 'https://og-examples.vercel.sh/api/static',
+  },
 }
 
 export default function RootLayout({

@@ -45,7 +45,7 @@ export const ProductList = ({ products }: { products: Products[] }) => {
               id={category}
               onChange={handleCategoryChange}
               checked={selectedCategories.includes(category)}
-              className="mr-2 h-3 w-3 accent-yellow-500  focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500"
+              className="mr-2 h-3 w-3 accent-yellow-500 focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500"
             />
             <label htmlFor={category} className="text-sm">
               {category}
@@ -57,9 +57,17 @@ export const ProductList = ({ products }: { products: Products[] }) => {
       <div className="">
         <h1 className="text-xl font-medium mb-8">Catalog</h1>
 
-        <select value={sortOrder} onChange={handleSortChange} className="py-2 px-4 pl-0">
-          <option value="asc">Price Up</option>
-          <option value="desc">Price Down</option>
+        <select
+          value={sortOrder}
+          onChange={handleSortChange}
+          className="py-2 px-4 pl-0 rounded focus:outline-none focus:ring-1 focus:ring-amber-500 bg-white"
+        >
+          <option value="asc" className="bg-amber-100">
+            Price Up
+          </option>
+          <option value="desc" className="bg-amber-100">
+            Price Down
+          </option>
         </select>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 mt-4 border-collapse border border-slate-100">

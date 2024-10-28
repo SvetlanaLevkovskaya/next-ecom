@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import Link from 'next/link'
 
 export const Header = () => {
   return (
@@ -34,7 +35,7 @@ export const Header = () => {
           </div>
         </div>
 
-        <div className="flex flex-col items-center gap-[1px]">
+        <Link href="/favorite" passHref className="flex flex-col items-center gap-[1px]">
           <Image
             height={0}
             width={0}
@@ -45,7 +46,7 @@ export const Header = () => {
             unoptimized
           />
           <span className="hidden md:block text-sm text-gray-700">Favorite</span>
-        </div>
+        </Link>
       </div>
     </header>
   )
