@@ -4,7 +4,7 @@ import { ReactElement, SyntheticEvent, useEffect, useState } from 'react'
 
 import Image, { ImageProps } from 'next/image'
 
-import notAvailable from '../../../public/no-image.png'
+import notAvailable from '@/public/no-image.png'
 
 interface Props extends Omit<ImageProps, 'src'> {
   fallback?: string

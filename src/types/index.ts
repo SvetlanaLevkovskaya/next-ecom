@@ -5,6 +5,7 @@ export interface Products {
   category: string
   description: string
   image: string
+  rating: { rate: number; count: number }
 }
 
 export type Params = {

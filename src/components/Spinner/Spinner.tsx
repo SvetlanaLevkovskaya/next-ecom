@@ -1,21 +1,19 @@
-import type { FC } from 'react'
-
-interface SpinnerProps {
+interface Props {
   size?: number
   center?: boolean
   className?: string
   currentColor?: boolean
 }
 
-export const Spinner: FC<SpinnerProps> = ({ size = 50, currentColor }) => {
+export const Spinner = ({ size = 50, currentColor }: Props) => {
   return (
-    <div className="bg-dark flex-center-center h-full w-full overflow-hidden">
+    <div className="flex items-center justify-center h-full">
       <svg
         viewBox="0 0 100 100"
         width={size}
         height={size}
         style={{ shapeRendering: 'crispEdges' }}
-        className="animate-spin "
+        className="animate-spin"
       >
         <circle
           cx="50"

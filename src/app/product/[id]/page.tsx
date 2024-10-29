@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 
 import { getProduct } from '@/services/clientApi'
 
-import { ProductDetails } from '@/app/product/[id]/_ui/ProductDetails'
+import { ProductDetails } from '@/app/product/[id]/_ui'
 import { Params } from '@/types'
 
 export async function generateMetadata({ params }: Params): Promise<Metadata> {

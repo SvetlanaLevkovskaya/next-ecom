@@ -1,8 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 
-import { ImageWithFallback } from '@/components/ImageWithFallback/ImageWithFallback'
-
+import { ImageWithFallback } from '@/components'
 import { Products } from '@/types'
 
 export const ProductCard = ({ product }: { product: Products }) => {
@@ -31,9 +30,9 @@ export const ProductCard = ({ product }: { product: Products }) => {
       <ImageWithFallback
         src={product.image}
         alt={product.title}
-        width={156}
-        height={209}
-        className="object-cover mx-auto"
+        width={100}
+        height={100}
+        className="object-cover mx-auto w-auto h-auto"
       />
 
       <div className="mt-auto pt-8">

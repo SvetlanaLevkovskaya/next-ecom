@@ -3,10 +3,9 @@ import { Suspense } from 'react'
 import type { Metadata } from 'next'
 import { Manrope } from 'next/font/google'
 
-import { MainLayout } from '@/components/MainLayout/MainLayout'
-import { Spinner } from '@/components/Spinner/Spinner'
-
 import './globals.css'
+
+import { MainLayout, Spinner } from '@/components'
 
 const manrope = Manrope({ subsets: ['latin'] })
 
