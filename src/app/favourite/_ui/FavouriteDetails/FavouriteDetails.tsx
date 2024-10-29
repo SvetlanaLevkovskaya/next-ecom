@@ -21,13 +21,13 @@ export const FavouriteDetails = () => {
   const formattedItemsText = getItemsText(favouriteProducts.length)
 
   return (
-    <section className="flex flex-col gap-6 my-10 w-full">
+    <section className="flex flex-col gap-6 my-10 w-full divide-y">
       {favouriteProducts.length > 0 && <div className="text-2xl">{formattedItemsText}</div>}
 
       {favouriteProducts.map((product) => {
         return (
-          <div key={product.id} className="flex items-center flex-col md:flex-row gap-8 w-full">
-            <div className="w-[134px] h-[178px]">
+          <div key={product.id} className="flex flex-col md:flex-row gap-8 w-full pt-4">
+            <div className="w-[134px] h-[200px] flex-center-center">
               <ImageWithFallback
                 src={product.image}
                 alt={product.title}
@@ -38,7 +38,7 @@ export const FavouriteDetails = () => {
               />
             </div>
 
-            <div className="flex flex-col gap-4 w-full md:w-auto flex-grow">
+            <div className="flex flex-col gap-4 w-full md:w-auto flex-grow py-4">
               <div>
                 <div className="flex flex-col md:flex-row gap-4">
                   <div>
@@ -50,11 +50,11 @@ export const FavouriteDetails = () => {
             </div>
 
             <div className="flex flex-col items-end gap-2">
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-2 whitespace-nowrap">
                 <p className="text-2xl font-bold">{product.price} $</p>
                 <button
                   onClick={() => dispatch(toggleFavourite(String(product.id)))}
-                  className="px-8 py-2 text-gray-500 rounded-md hover:bg-gray-100 transition-colors"
+                  className="px-6 py-2 text-gray-500 rounded-md hover:bg-gray-100 transition-all2"
                 >
                   Remove
                 </button>

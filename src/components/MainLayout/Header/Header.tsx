@@ -28,7 +28,7 @@ export const Header = () => {
 
           <div className="relative max-w-[428px]">
             <input
-              className="w-[300px] sm:w-[428px] border border-slate-200 focus:border-amber-500 transition-colors duration-200 ease-in-out p-4 pl-6 rounded-lg text-sm placeholder-gray-500 outline-none"
+              className="w-[300px] sm:w-[428px] border border-slate-200 focus:border-amber-500 transition-all2 p-4 pl-6 rounded-lg text-sm placeholder-gray-500 outline-none"
               placeholder="Search"
             />
             <Image

@@ -40,14 +40,15 @@ export const ProductCard = ({ product }: { product: Products }) => {
         />
       </div>
 
-      <ImageWithFallback
-        src={product.image}
-        alt={product.title}
-        width={100}
-        height={100}
-        className="object-cover mx-auto w-auto h-auto"
-      />
-
+      <div className="flex-center-center w-[140px] h-[200px] self-center">
+        <ImageWithFallback
+          src={product.image}
+          alt={product.title}
+          width={100}
+          height={100}
+          className="object-cover mx-auto w-auto h-auto"
+        />
+      </div>
       <div className="mt-auto pt-8">
         <p className="text-2xl font-black text-gray-900">{product.price}&#32;$</p>
       </div>

@@ -46,7 +46,7 @@ export const ProductDetails = ({ product }: { product: Products }) => {
               {/* Кнопка 'Add to Favourite' */}
               <button
                 onClick={() => dispatch(toggleFavourite(String(product.id)))}
-                className="flex-center-center gap-3 w-[200px] border border-slate-200 h-9 px-4 text-sm rounded-md hover:bg-gray-100 transition-colors whitespace-nowrap"
+                className="flex-center-center gap-3 w-48 border border-slate-200 h-9 px-2 text-sm rounded-md hover:bg-gray-100 transition-all2 whitespace-nowrap"
               >
                 <span>{isFavored ? 'Remove from Favourite' : 'Add to Favourite'}</span>
                 <FaHeart
