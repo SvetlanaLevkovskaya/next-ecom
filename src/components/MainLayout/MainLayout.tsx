@@ -14,7 +14,7 @@ export const MainLayout = ({ children }: { children: React.ReactNode }) => {
       <Header />
       <SubHeader />
       {pathname === '/favourite' && <FavouriteHeader />}
-      <main className="flex-grow flex flex-col items-center justify-center w-full max-w-[932px] p-2 mx-auto">
+      <main className="flex-grow flex flex-col items-center justify-center w-full max-w-[932px] p-4 mx-auto">
         {children}
       </main>
       <Footer />

@@ -13,7 +13,7 @@ export const Header = () => {
   const favouritesCount = useSelector((state: RootState) => state.favourites.items.length)
   return (
     <header className="sticky top-0 z-10 bg-white border-b border-slate-200 py-3">
-      <div className="flex items-center justify-between gap-4 max-w-[932px] px-2 mx-auto">
+      <div className="flex items-center justify-between gap-4 max-w-[932px] px-4 mx-auto">
         <div className="flex items-center justify-between w-3/4">
           <Image
             height={0}
