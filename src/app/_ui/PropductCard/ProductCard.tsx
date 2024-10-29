@@ -1,10 +1,23 @@
-import Image from 'next/image'
+'use client'
+
+import { FaHeart } from 'react-icons/fa'
+import { useDispatch, useSelector } from 'react-redux'
+
+import clsx from 'clsx'
 import Link from 'next/link'
+
+import { toggleFavourite } from '@/store/favouritesSlice'
+import { RootState } from '@/store/store'
 
 import { ImageWithFallback } from '@/components'
 import { Products } from '@/types'
 
 export const ProductCard = ({ product }: { product: Products }) => {
+  const dispatch = useDispatch()
+  const isFavored = useSelector((state: RootState) =>
+    state.favourites.items.includes(String(product.id))
+  )
+
   const shouldTruncate = product.title.length > 30
   const displayedTitle = shouldTruncate ? `${product.title.slice(0, 30)}...` : product.title
   return (
@@ -16,14 +29,14 @@ export const ProductCard = ({ product }: { product: Products }) => {
       <h3 className="text-sm font-medium  min-h-10">{displayedTitle}</h3>
 
       <div className="absolute top-4 right-4">
-        <Image
-          height={0}
-          width={0}
-          style={{ height: '20px', width: '20px' }}
-          alt={'favorite'}
-          src="/favorite.svg"
-          priority
-          unoptimized
+        <FaHeart
+          className={clsx('text-gray-300 cursor-pointer transition-all2 hover:scale-110', {
+            'text-red-500': isFavored,
+          })}
+          onClick={(e) => {
+            e.preventDefault()
+            dispatch(toggleFavourite(String(product.id)))
+          }}
         />
       </div>
 

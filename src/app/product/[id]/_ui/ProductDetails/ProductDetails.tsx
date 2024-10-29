@@ -1,10 +1,22 @@
-import Image from 'next/image'
+'use client'
+
+import { FaHeart } from 'react-icons/fa'
+import { useDispatch, useSelector } from 'react-redux'
+
+import clsx from 'clsx'
+
+import { toggleFavourite } from '@/store/favouritesSlice'
+import { RootState } from '@/store/store'
 
 import { ImageWithFallback } from '@/components'
 import { Products } from '@/types'
 import { getStarIcons } from '@/utils'
 
 export const ProductDetails = ({ product }: { product: Products }) => {
+  const dispatch = useDispatch()
+  const isFavored = useSelector((state: RootState) =>
+    state.favourites.items.includes(String(product.id))
+  )
   return (
     <section className="flex flex-col md:flex-row justify-center items-center mx-auto gap-6 my-10">
       <div className="flex flex-col md:flex-row items-center justify-center gap-8">
@@ -31,16 +43,17 @@ export const ProductDetails = ({ product }: { product: Products }) => {
                 </div>
               </div>
 
-              {/* Кнопка 'Add to Favorite' */}
-              <button className="flex items-center gap-2 w-44 border border-slate-200 h-9 px-6 text-sm rounded-md hover:bg-gray-100 transition-colors whitespace-nowrap">
-                <span>Add to Favorite</span>
-                <Image
-                  height={20}
-                  width={20}
-                  alt="favorite"
-                  src="/favorite.svg"
-                  priority
-                  unoptimized
+              {/* Кнопка 'Add to Favourite' */}
+              <button
+                onClick={() => dispatch(toggleFavourite(String(product.id)))}
+                className="flex-center-center gap-3 w-[200px] border border-slate-200 h-9 px-4 text-sm rounded-md hover:bg-gray-100 transition-colors whitespace-nowrap"
+              >
+                <span>{isFavored ? 'Remove from Favourite' : 'Add to Favourite'}</span>
+                <FaHeart
+                  size={20}
+                  className={clsx('text-gray-300 cursor-pointer transition-all2', {
+                    'text-red-500': isFavored,
+                  })}
                 />
               </button>
             </div>
@@ -55,7 +68,7 @@ export const ProductDetails = ({ product }: { product: Products }) => {
               </div>
               <div className="flex flex-col items-center md:items-end gap-2">
                 <p className="text-2xl font-bold text-gray-900">{product.price} $</p>
-                <button className="px-8 py-2 bg-amber-400 text-white font-medium rounded-md hover:bg-amber-500 transition-colors">
+                <button className="px-8 py-2 bg-amber-400 text-white font-medium rounded-md hover:bg-amber-500 transition-all2">
                   Buy
                 </button>
               </div>

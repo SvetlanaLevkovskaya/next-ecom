@@ -1,7 +1,16 @@
+'use client'
+
+import { FaHeart } from 'react-icons/fa'
+import { useSelector } from 'react-redux'
+
+import clsx from 'clsx'
 import Image from 'next/image'
 import Link from 'next/link'
 
+import { RootState } from '@/store/store'
+
 export const Header = () => {
+  const favouritesCount = useSelector((state: RootState) => state.favourites.items.length)
   return (
     <header className="sticky top-0 z-10 bg-white border-b border-slate-200 py-3">
       <div className="flex items-center justify-between gap-4 max-w-[932px] px-2 mx-auto">
@@ -35,17 +44,14 @@ export const Header = () => {
           </div>
         </div>
 
-        <Link href="/favorite" passHref className="flex flex-col items-center gap-[1px]">
-          <Image
-            height={0}
-            width={0}
-            style={{ height: '20px', width: '20px' }}
-            alt={'favorite'}
-            src="/favorite.svg"
-            priority
-            unoptimized
+        <Link href="/favourite" passHref className="flex flex-col items-center gap-[1px]">
+          <FaHeart
+            className={clsx('text-gray-300 cursor-pointer transition-all2', {
+              'text-red-500': favouritesCount > 0,
+            })}
           />
-          <span className="hidden md:block text-sm text-gray-700">Favorite</span>
+
+          <span className="hidden md:block text-sm text-gray-700">Favourite</span>
         </Link>
       </div>
     </header>

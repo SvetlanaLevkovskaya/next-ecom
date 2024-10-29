@@ -1,11 +1,11 @@
-interface Props {
+export const Spinner = ({
+  size = 50,
+  currentColor,
+}: {
   size?: number
-  center?: boolean
   className?: string
   currentColor?: boolean
-}
-
-export const Spinner = ({ size = 50, currentColor }: Props) => {
+}) => {
   return (
     <div className="flex items-center justify-center h-full">
       <svg

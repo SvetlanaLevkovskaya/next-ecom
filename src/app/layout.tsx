@@ -6,6 +6,7 @@ import { Manrope } from 'next/font/google'
 import './globals.css'
 
 import { MainLayout, Spinner } from '@/components'
+import { ClientProvider } from '@/providers/ClientProvider'
 
 const manrope = Manrope({ subsets: ['latin'] })
 
@@ -28,7 +29,9 @@ export default function RootLayout({
     <html lang="en">
       <body className={manrope.className}>
         <Suspense fallback={<Spinner />}>
-          <MainLayout>{children}</MainLayout>
+          <ClientProvider>
+            <MainLayout>{children}</MainLayout>
+          </ClientProvider>
         </Suspense>
       </body>
     </html>

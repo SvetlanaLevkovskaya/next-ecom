@@ -3,5 +3,4 @@ export const categories: string[] = [
   "men's clothing",
   'electronics',
   'jewelery',
-  'new',
 ]
