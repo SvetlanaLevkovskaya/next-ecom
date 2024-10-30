@@ -1,31 +1,43 @@
 'use client'
 
-import { useState } from 'react'
+import { ChangeEvent, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+
+import { setSortOrder } from '@/store/productsSlice'
+import { RootState } from '@/store/store'
 
 import { ProductCard, categories } from '@/app/_ui'
-import { Products } from '@/types'
+import { Spinner } from '@/components'
 
-export const ProductList = ({ products }: { products: Products[] }) => {
-  const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc')
+export const ProductList = () => {
+  const dispatch = useDispatch()
   const [selectedCategories, setSelectedCategories] = useState<string[]>([])
 
-  const handleSortChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setSortOrder(event.target.value as 'asc' | 'desc')
+  const { sortOrder, isLoading, error } = useSelector((state: RootState) => state.products)
+
+  const filteredProducts = useSelector((state: RootState) => state.products.filteredItems)
+
+  console.log('filteredProducts', filteredProducts)
+
+  const handleSortChange = (event: ChangeEvent<HTMLSelectElement>) => {
+    const newSortOrder = event.target.value as 'asc' | 'desc'
+    dispatch(setSortOrder(newSortOrder))
+    localStorage.setItem('sortOrder', newSortOrder)
   }
 
-  const handleCategoryChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleCategoryChange = (event: ChangeEvent<HTMLInputElement>) => {
     const category = event.target.value
     setSelectedCategories((prev) =>
       prev.includes(category) ? prev.filter((c) => c !== category) : [...prev, category]
     )
   }
 
-  const filteredProducts =
+  const categoryFilteredProducts =
     selectedCategories.length > 0
-      ? products.filter((product) => selectedCategories.includes(product.category))
-      : products
+      ? filteredProducts.filter((product) => selectedCategories.includes(product.category))
+      : filteredProducts
 
-  const sortedProducts = [...filteredProducts].sort((a, b) => {
+  const sortedProducts = [...categoryFilteredProducts].sort((a, b) => {
     return sortOrder === 'asc' ? a.price - b.price : b.price - a.price
   })
 
@@ -53,81 +65,26 @@ export const ProductList = ({ products }: { products: Products[] }) => {
 
       <section className="w-full md:w-3/4">
         <h1 className="text-xl font-medium mb-8">Catalog</h1>
-        {sortedProducts.length > 0 ? (
-          <>
-            <select
-              value={sortOrder}
-              onChange={handleSortChange}
-              className="py-2 px-4 pl-0 rounded focus:outline-none focus:ring-1 focus:ring-amber-500 bg-white text-sm"
-            >
-              <option value="asc" className="text-sm bg-amber-100">
-                Price Up
-              </option>
-              <option value="desc" className="text-sm bg-amber-100">
-                Price Down
-              </option>
-            </select>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 mt-4 border-collapse border border-slate-100">
-              {sortedProducts.map((product) => (
-                <ProductCard key={product.id} product={product} />
-              ))}
-            </div>
-          </>
-        ) : (
-          <div className="mt-4 text-sm">No products found for the selected categories.</div>
-        )}
+        <select
+          value={sortOrder}
+          onChange={handleSortChange}
+          className="py-2 px-4 pl-0 rounded focus:outline-none focus:ring-1 focus:ring-amber-500 bg-white text-sm"
+        >
+          <option value="asc" className="text-sm bg-amber-100">
+            Price Up
+          </option>
+          <option value="desc" className="text-sm bg-amber-100">
+            Price Down
+          </option>
+        </select>
+        {isLoading && <Spinner />}
+        {error && <div>Error: {error}</div>}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 mt-4 border-collapse border border-slate-100">
+          {sortedProducts.map((product) => (
+            <ProductCard key={product.id} product={product} />
+          ))}
+        </div>
       </section>
     </div>
   )
 }
-
-/*
- return (
- <div className="flex flex-col md:flex-row gap-y-2.5 max-w-[946px] my-6 md:mx-auto">
- <div className="w-full md:w-1/4 pr-4">
- <h2 className="text-xl font-medium mb-8">Filters</h2>
- {categories &&
- categories.map((category) => (
- <div key={category} className="flex items-center mb-2">
- <input
- type="checkbox"
- value={category}
- id={category}
- onChange={handleCategoryChange}
- checked={selectedCategories.includes(category)}
- className="mr-2 h-3 w-3 accent-yellow-500 focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500"
- />
- <label htmlFor={category} className="text-sm">
- {category}
- </label>
- </div>
- ))}
- </div>
-
- <div className="w-full md:w-3/4">
- <h1 className="text-xl font-medium mb-8">Catalog</h1>
- {sortedProducts.length > 0 && (
- <>
- <select
- value={sortOrder}
- onChange={handleSortChange}
- className="py-2 px-4 pl-0 rounded focus:outline-none focus:ring-1 focus:ring-amber-500 bg-white"
- >
- <option value="asc" className="bg-amber-100">
- Price Up
- </option>
- <option value="desc" className="bg-amber-100">
- Price Down
- </option>
- </select>
- <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 mt-4 border-collapse border border-slate-100">
- {sortedProducts &&
- sortedProducts.map((product) => <ProductCard key={product.id} product={product} />)}
- </div>
- </>
- )}
- </div>
- </div>
- )
- }
- */

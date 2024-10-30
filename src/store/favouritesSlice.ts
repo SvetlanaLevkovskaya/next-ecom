@@ -23,9 +23,6 @@ const favouritesSlice = createSlice({
       } else {
         state.items.splice(index, 1)
       }
-      if (typeof window !== 'undefined') {
-        localStorage.setItem('favourites', JSON.stringify(state.items))
-      }
     },
   },
 })

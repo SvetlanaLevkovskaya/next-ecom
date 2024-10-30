@@ -1,16 +1,27 @@
 'use client'
 
+import { ChangeEvent } from 'react'
 import { FaHeart } from 'react-icons/fa'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
 import clsx from 'clsx'
 import Image from 'next/image'
 import Link from 'next/link'
 
+import { setSearchQuery } from '@/store/productsSlice'
 import { RootState } from '@/store/store'
 
 export const Header = () => {
+  const dispatch = useDispatch()
   const favouritesCount = useSelector((state: RootState) => state.favourites.items.length)
+  const searchQuery = useSelector((state: RootState) => state.products.searchQuery)
+
+  const handleSearchChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const query = event.target.value
+    dispatch(setSearchQuery(query))
+    localStorage.setItem('searchQuery', query)
+  }
+
   return (
     <header className="sticky top-0 z-10 bg-white border-b border-slate-200 py-3">
       <div className="flex items-center justify-between gap-4 max-w-[932px] px-4 mx-auto">
@@ -30,6 +41,9 @@ export const Header = () => {
             <input
               className="w-[300px] sm:w-[428px] border border-slate-200 focus:border-amber-500 transition-all2 p-4 pl-6 rounded-lg text-sm placeholder-gray-500 outline-none"
               placeholder="Search"
+              onChange={handleSearchChange}
+              value={searchQuery}
+              autoFocus
             />
             <Image
               height={0}

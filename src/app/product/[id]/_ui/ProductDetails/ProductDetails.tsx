@@ -20,7 +20,6 @@ export const ProductDetails = ({ product }: { product: Products }) => {
   return (
     <section className="flex flex-col md:flex-row justify-center items-center mx-auto gap-6 my-10">
       <div className="flex flex-col md:flex-row items-center justify-center gap-8">
-        {/* Изображение продукта */}
         <ImageWithFallback
           src={product.image}
           alt={product.title}
@@ -29,7 +28,6 @@ export const ProductDetails = ({ product }: { product: Products }) => {
           className="object-cover"
         />
 
-        {/* Информация о продукте */}
         <div className="flex flex-col gap-4 w-full md:w-auto divide-y ">
           <div>
             <div className="flex flex-col md:flex-row justify-between gap-4">
@@ -43,7 +41,6 @@ export const ProductDetails = ({ product }: { product: Products }) => {
                 </div>
               </div>
 
-              {/* Кнопка 'Add to Favourite' */}
               <button
                 onClick={() => dispatch(toggleFavourite(String(product.id)))}
                 className="flex-center-center gap-3 w-48 border border-slate-200 h-9 px-2 text-sm rounded-md hover:bg-gray-100 transition-all2 whitespace-nowrap"
@@ -59,7 +56,6 @@ export const ProductDetails = ({ product }: { product: Products }) => {
             </div>
           </div>
 
-          {/* Описание и цена */}
           <div>
             <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mt-10">
               <div className="w-full md:w-3/4">

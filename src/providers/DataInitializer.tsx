@@ -6,9 +6,13 @@ import { useDispatch } from 'react-redux'
 import { getProducts } from '@/services/clientApi'
 
 import { setFavourites } from '@/store/favouritesSlice'
-import { setProducts } from '@/store/productsSlice'
-
-import { customToastError } from '@/components'
+import {
+  setError,
+  setLoading,
+  setProducts,
+  setSearchQuery,
+  setSortOrder,
+} from '@/store/productsSlice'
 
 export function DataInitializer() {
   const dispatch = useDispatch()
@@ -19,12 +23,30 @@ export function DataInitializer() {
       dispatch(setFavourites(JSON.parse(savedFavourites)))
     }
 
+    const savedSortOrder = localStorage.getItem('sortOrder') as 'asc' | 'desc'
+    if (savedSortOrder) {
+      dispatch(setSortOrder(savedSortOrder))
+    }
+
+    const savedSearchQuery = localStorage.getItem('searchQuery')
+    if (savedSearchQuery && savedSearchQuery.trim() !== '') {
+      dispatch(setSearchQuery(savedSearchQuery))
+    }
+
     const fetchProducts = async () => {
       try {
+        dispatch(setLoading(true))
+
         const products = await getProducts()
         dispatch(setProducts(products))
+
+        if (savedSearchQuery) {
+          dispatch(setSearchQuery(savedSearchQuery))
+        }
+
+        dispatch(setLoading(false))
       } catch (error) {
-        customToastError(`Failed to fetch products: ${error}`)
+        dispatch(setError(`Failed to fetch products: ${error}`))
         console.error('Failed to fetch products:', error)
       }
     }
