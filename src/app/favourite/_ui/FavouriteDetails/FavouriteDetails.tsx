@@ -26,8 +26,8 @@ export const FavouriteDetails = () => {
 
       {favouriteProducts.map((product) => {
         return (
-          <div key={product.id} className="flex flex-col md:flex-row gap-8 w-full pt-4">
-            <div className="w-[140px] h-[220px] flex justify-center items-center  flex-shrink-0">
+          <div key={product.id} className="flex flex-col md:flex-row gap-4 md:gap-8 pt-4">
+            <div className="w-[140px] h-[220px] flex justify-center items-center self-center  flex-shrink-0">
               <ImageWithFallback
                 src={product.image}
                 alt={product.title}
@@ -41,13 +41,13 @@ export const FavouriteDetails = () => {
             <div className="flex flex-col gap-4 w-full md:w-auto flex-grow py-4">
               <div className="flex flex-col md:flex-row gap-4">
                 <div>
-                  <p className="text-sm text-gray-500">{product.category}</p>
+                  <p className="text-sm text-gray-500 pb-4">{product.category}</p>
                   <h2 className="text-xl font-bold">{product.title}</h2>
                 </div>
               </div>
             </div>
 
-            <div className="flex flex-col items-end gap-2">
+            <div className="flex flex-col items-end gap-2 py-2 md:py-6">
               <div className="flex items-center gap-2 whitespace-nowrap">
                 <p className="text-2xl font-bold">{product.price} $</p>
                 <button

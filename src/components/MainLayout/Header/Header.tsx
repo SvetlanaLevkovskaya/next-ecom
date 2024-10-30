@@ -34,16 +34,18 @@ export const Header = () => {
     <header className="sticky top-0 z-10 bg-white border-b border-slate-200 py-3">
       <div className="flex items-center justify-between gap-4 max-w-[932px] px-4 mx-auto">
         <div className="flex items-center justify-between w-3/4">
-          <Image
-            height={0}
-            width={0}
-            style={{ height: '40px', width: '116px' }}
-            alt={'logo'}
-            src="/logo.svg"
-            priority
-            unoptimized
-            className="hidden md:block"
-          />
+          <Link href={'/'}>
+            <Image
+              height={0}
+              width={0}
+              style={{ height: '40px', width: '116px' }}
+              alt={'logo'}
+              src="/logo.svg"
+              priority
+              unoptimized
+              className="hidden md:block"
+            />
+          </Link>
 
           <div className="relative max-w-[428px]">
             <input
