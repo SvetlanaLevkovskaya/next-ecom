@@ -8,6 +8,7 @@ export const store = configureStore({
     favourites: favouritesReducer,
     products: productsReducer,
   },
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware(),
 })
 
 export type RootState = ReturnType<typeof store.getState>

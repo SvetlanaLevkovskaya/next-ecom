@@ -6,7 +6,8 @@ import { ProductDetails } from '@/app/product/[id]/_ui'
 import { Params } from '@/types'
 
 export async function generateMetadata({ params }: Params): Promise<Metadata> {
-  return { title: `Product ${params.id}` }
+  const product = await getProduct(params.id)
+  return { title: product ? product.title : `Product ${params.id}` }
 }
 
 export default async function ProductPage({ params }: Params) {

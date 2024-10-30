@@ -1,9 +1,9 @@
 'use client'
 
-import { ChangeEvent, useState } from 'react'
+import { ChangeEvent } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
-import { setSortOrder } from '@/store/productsSlice'
+import { setSelectedCategories, setSortOrder } from '@/store/productsSlice'
 import { RootState } from '@/store/store'
 
 import { ProductCard, categories } from '@/app/_ui'
@@ -11,36 +11,24 @@ import { Spinner } from '@/components'
 
 export const ProductList = () => {
   const dispatch = useDispatch()
-  const [selectedCategories, setSelectedCategories] = useState<string[]>([])
 
-  const { sortOrder, isLoading, error } = useSelector((state: RootState) => state.products)
-
-  const filteredProducts = useSelector((state: RootState) => state.products.filteredItems)
-
-  console.log('filteredProducts', filteredProducts)
+  const { sortOrder, isLoading, error, filteredItems, selectedCategories } = useSelector(
+    (state: RootState) => state.products
+  )
 
   const handleSortChange = (event: ChangeEvent<HTMLSelectElement>) => {
     const newSortOrder = event.target.value as 'asc' | 'desc'
     dispatch(setSortOrder(newSortOrder))
-    localStorage.setItem('sortOrder', newSortOrder)
   }
 
   const handleCategoryChange = (event: ChangeEvent<HTMLInputElement>) => {
     const category = event.target.value
-    setSelectedCategories((prev) =>
-      prev.includes(category) ? prev.filter((c) => c !== category) : [...prev, category]
-    )
+    const updatedCategories = selectedCategories.includes(category)
+      ? selectedCategories.filter((c) => c !== category)
+      : [...selectedCategories, category]
+
+    dispatch(setSelectedCategories(updatedCategories))
   }
-
-  const categoryFilteredProducts =
-    selectedCategories.length > 0
-      ? filteredProducts.filter((product) => selectedCategories.includes(product.category))
-      : filteredProducts
-
-  const sortedProducts = [...categoryFilteredProducts].sort((a, b) => {
-    return sortOrder === 'asc' ? a.price - b.price : b.price - a.price
-  })
-
   return (
     <div className="flex flex-col md:flex-row gap-6 max-w-[946px] my-2 md:mx-auto w-full">
       <aside className="w-full md:w-1/4">
@@ -83,7 +71,7 @@ export const ProductList = () => {
         {isLoading && <Spinner />}
         {error && <div>Error: {error}</div>}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 mt-4 border-collapse border border-slate-100">
-          {sortedProducts.map((product) => (
+          {filteredItems.map((product) => (
             <ProductCard key={product.id} product={product} />
           ))}
         </div>

@@ -42,10 +42,6 @@ export async function getProducts(): Promise<Products[]> {
 }
 
 export async function getProduct(id: number): Promise<Products> {
-  try {
-    const response = await instanceAxios.get(`/products/${id}`)
-    return response.data
-  } catch (error) {
-    throw new Error(handleApiError(error))
-  }
+  const response = await instanceAxios.get(`/products/${id}`)
+  return response.data
 }

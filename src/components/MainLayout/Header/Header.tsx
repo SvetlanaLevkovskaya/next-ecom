@@ -1,25 +1,33 @@
 'use client'
 
-import { ChangeEvent } from 'react'
+import { ChangeEvent, KeyboardEvent } from 'react'
 import { FaHeart } from 'react-icons/fa'
 import { useDispatch, useSelector } from 'react-redux'
 
 import clsx from 'clsx'
 import Image from 'next/image'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 
 import { setSearchQuery } from '@/store/productsSlice'
 import { RootState } from '@/store/store'
 
 export const Header = () => {
   const dispatch = useDispatch()
+  const router = useRouter()
   const favouritesCount = useSelector((state: RootState) => state.favourites.items.length)
   const searchQuery = useSelector((state: RootState) => state.products.searchQuery)
 
   const handleSearchChange = (event: ChangeEvent<HTMLInputElement>) => {
     const query = event.target.value
     dispatch(setSearchQuery(query))
-    localStorage.setItem('searchQuery', query)
+    router.push(`/?search=${encodeURIComponent(searchQuery)}`)
+  }
+
+  const handleKeyPress = (event: KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === 'Enter') {
+      router.push(`/?search=${encodeURIComponent(searchQuery)}`)
+    }
   }
 
   return (
@@ -42,6 +50,7 @@ export const Header = () => {
               className="w-[300px] sm:w-[428px] border border-slate-200 focus:border-amber-500 transition-all2 p-4 pl-6 rounded-lg text-sm placeholder-gray-500 outline-none"
               placeholder="Search"
               onChange={handleSearchChange}
+              onKeyDown={handleKeyPress}
               value={searchQuery}
               autoFocus
             />

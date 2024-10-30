@@ -11,6 +11,7 @@ import {
   setLoading,
   setProducts,
   setSearchQuery,
+  setSelectedCategories,
   setSortOrder,
 } from '@/store/productsSlice'
 
@@ -33,16 +34,17 @@ export function DataInitializer() {
       dispatch(setSearchQuery(savedSearchQuery))
     }
 
+    const savedCategories = localStorage.getItem('selectedCategories')
+    if (savedCategories) {
+      dispatch(setSelectedCategories(JSON.parse(savedCategories)))
+    }
+
     const fetchProducts = async () => {
       try {
         dispatch(setLoading(true))
 
         const products = await getProducts()
         dispatch(setProducts(products))
-
-        if (savedSearchQuery) {
-          dispatch(setSearchQuery(savedSearchQuery))
-        }
 
         dispatch(setLoading(false))
       } catch (error) {
