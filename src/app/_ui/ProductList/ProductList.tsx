@@ -42,7 +42,7 @@ export const ProductList = () => {
   })
 
   return (
-    <div className="flex flex-col md:flex-row gap-6 max-w-[946px] my-6 md:mx-auto w-full">
+    <div className="flex flex-col md:flex-row gap-6 max-w-[946px] my-2 md:mx-auto w-full">
       <aside className="w-full md:w-1/4">
         <h2 className="text-base font-medium mb-8">Filters</h2>
         {categories &&
@@ -64,7 +64,10 @@ export const ProductList = () => {
       </aside>
 
       <section className="w-full md:w-3/4">
-        <h1 className="text-xl font-medium mb-8">Catalog</h1>
+        <div className="text-sm mb-10">
+          Main {'>'} <strong>Catalog</strong>
+        </div>
+        <h1 className="text-xl font-medium mb-6">Catalog</h1>
         <select
           value={sortOrder}
           onChange={handleSortChange}
