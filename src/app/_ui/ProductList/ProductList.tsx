@@ -70,7 +70,7 @@ export const ProductList = () => {
         </select>
         {isLoading && <Spinner />}
         {error && <div>Error: {error}</div>}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 mt-4 border-collapse border border-slate-100">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 mt-4">
           {filteredItems.map((product) => (
             <ProductCard key={product.id} product={product} />
           ))}

@@ -23,7 +23,7 @@ export const ProductCard = ({ product }: { product: Products }) => {
   return (
     <Link
       href={`/product/${product.id}`}
-      className="relative flex flex-col justify-between p-4 gap-2.5 border border-slate-200"
+      className="relative flex flex-col justify-between p-4 gap-2.5 outline outline-1 outline-slate-200 border"
     >
       <p className="text-sm text-gray-500">{product.category}</p>
       <h3 className="text-sm font-medium  min-h-10">{displayedTitle}</h3>
