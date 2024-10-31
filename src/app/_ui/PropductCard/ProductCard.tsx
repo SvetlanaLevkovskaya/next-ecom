@@ -30,7 +30,7 @@ export const ProductCard = ({ product }: { product: Products }) => {
 
       <div className="absolute top-4 right-4">
         <FaHeart
-          className={clsx('text-gray-300 cursor-pointer transition-all2 hover:scale-110', {
+          className={clsx('text-gray-300 cursor-pointer transition-all hover:scale-110', {
             'text-red-500': isFavored,
           })}
           onClick={(e) => {

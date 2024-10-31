@@ -52,7 +52,7 @@ export const FavouriteDetails = () => {
                 <p className="text-2xl font-bold">{product.price} $</p>
                 <button
                   onClick={() => dispatch(toggleFavourite(String(product.id)))}
-                  className="px-6 py-2 text-gray-500 rounded-md hover:bg-gray-100 transition-all2"
+                  className="px-6 py-2 text-gray-500 rounded-md hover:bg-gray-100 transition-all"
                 >
                   Remove
                 </button>

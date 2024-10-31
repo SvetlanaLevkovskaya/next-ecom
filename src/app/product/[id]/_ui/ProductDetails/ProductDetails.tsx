@@ -49,12 +49,12 @@ export const ProductDetails = ({ product }: { product: Products }) => {
 
                 <button
                   onClick={() => dispatch(toggleFavourite(String(product.id)))}
-                  className="flex-center-center gap-3 w-48 border border-slate-200 h-9 px-2 text-sm rounded-md hover:bg-gray-100 transition-all2 whitespace-nowrap"
+                  className="flex-center-center gap-3 w-48 border border-slate-200 h-9 px-2 text-sm rounded-md hover:bg-gray-100 transition-all whitespace-nowrap"
                 >
                   <span>{isFavored ? 'Remove from Favourite' : 'Add to Favourite'}</span>
                   <FaHeart
                     size={20}
-                    className={clsx('text-gray-300 cursor-pointer transition-all2', {
+                    className={clsx('text-gray-300 cursor-pointer transition-all', {
                       'text-red-500': isFavored,
                     })}
                   />
