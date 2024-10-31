@@ -47,6 +47,7 @@ export const ProductCard = ({ product }: { product: Products }) => {
           width={100}
           height={100}
           className="object-cover mx-auto w-auto h-auto"
+          priority
         />
       </div>
       <div className="mt-auto pt-8">
