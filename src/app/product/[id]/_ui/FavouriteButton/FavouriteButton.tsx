@@ -6,7 +6,9 @@ import clsx from 'clsx'
 import { toggleFavourite } from '@/store/favouritesSlice'
 import { RootState } from '@/store/store'
 
-export const FavouriteButton = ({ id }: { id: number }) => {
+import { OptionalProduct } from '@/types'
+
+export const FavouriteButton = ({ id }: OptionalProduct) => {
   const dispatch = useDispatch()
   const isFavored = useSelector((state: RootState) => state.favourites.items.includes(String(id)))
   return (

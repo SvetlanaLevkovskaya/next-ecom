@@ -10,13 +10,13 @@ import { toggleFavourite } from '@/store/favouritesSlice'
 import { RootState } from '@/store/store'
 
 import { ImageWithFallback } from '@/components'
-import { Products } from '@/types'
+import { OptionalProduct } from '@/types'
 
-export const ProductCard = ({ id, title, image, category, price }: Products) => {
+export const ProductCard = ({ id, title, image, category, price }: OptionalProduct) => {
   const dispatch = useDispatch()
   const isFavored = useSelector((state: RootState) => state.favourites.items.includes(String(id)))
 
-  const shouldTruncate = title.length > 30
+  const shouldTruncate = title && title.length > 30
   const displayedTitle = shouldTruncate ? `${title.slice(0, 30)}...` : title
   return (
     <Link
@@ -41,7 +41,7 @@ export const ProductCard = ({ id, title, image, category, price }: Products) => 
       <div className="flex-center-center w-[156px] h-[224px] self-center">
         <ImageWithFallback
           src={image}
-          alt={title}
+          alt={title ?? 'Image'}
           width={100}
           height={100}
           className="object-cover mx-auto w-auto h-auto"

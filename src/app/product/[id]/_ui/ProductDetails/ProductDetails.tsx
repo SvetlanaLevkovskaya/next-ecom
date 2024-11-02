@@ -10,9 +10,9 @@ import { FavouriteButton } from '@/app/product/[id]/_ui/FavouriteButton/Favourit
 import { ProductImage } from '@/app/product/[id]/_ui/ProductImage/ProductImage'
 import { ProductInfo } from '@/app/product/[id]/_ui/ProductInfo/ProductInfo'
 import { PurchaseSection } from '@/app/product/[id]/_ui/PurchaseSection/PurchaseSection'
-import { BreadcrumbItem, Products } from '@/types'
+import { BreadcrumbItem, OptionalProduct } from '@/types'
 
-export const ProductDetails = ({ product }: { product: Products }) => {
+export const ProductDetails = ({ product }: { product: OptionalProduct }) => {
   const { id, title, image, description, price, rating } = product
   const breadcrumbs: BreadcrumbItem[] = useMemo(
     () => [{ title: 'Main', path: '/' }, { title: 'Catalog', path: '/' }, { title }],

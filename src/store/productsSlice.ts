@@ -1,10 +1,10 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 
-import { BreadcrumbItem, Products } from '@/types'
+import { BreadcrumbItem, Product } from '@/types'
 
 interface ProductsState {
-  items: Products[]
-  filteredItems: Products[]
+  items: Product[]
+  filteredItems: Product[]
   searchQuery: string
   sortOrder: 'asc' | 'desc'
   selectedCategories: string[]
@@ -51,7 +51,7 @@ const productsSlice = createSlice({
     setBreadcrumbs(state, { payload }: PayloadAction<BreadcrumbItem[]>) {
       state.breadcrumbs = payload
     },
-    setProducts: (state, { payload }: PayloadAction<Products[]>) => {
+    setProducts: (state, { payload }: PayloadAction<Product[]>) => {
       state.items = payload
       applyFilters(state)
     },

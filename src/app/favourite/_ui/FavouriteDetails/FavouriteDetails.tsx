@@ -2,12 +2,11 @@
 
 import { useDispatch, useSelector } from 'react-redux'
 
-import { getPluralisedItemsText } from '@/utils/getPluralisedItemsText'
-
 import { toggleFavourite } from '@/store/favouritesSlice'
 import { RootState } from '@/store/store'
 
 import { ImageWithFallback } from '@/components'
+import { getPluralisedItemsText } from '@/utils'
 
 export const FavouriteDetails = () => {
   const dispatch = useDispatch()

@@ -3,7 +3,7 @@ export interface Rate {
   count: number
 }
 
-export interface Products {
+export interface Product {
   id: number
   title: string
   price: number
@@ -13,6 +13,8 @@ export interface Products {
   rating: Rate
 }
 
+export type OptionalProduct = Partial<Product>
+
 export type Params = {
   params: {
     id: number
@@ -20,6 +22,6 @@ export type Params = {
 }
 
 export type BreadcrumbItem = {
-  title: string
+  title?: string
   path?: string
 }

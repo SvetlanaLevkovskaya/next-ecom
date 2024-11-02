@@ -1,8 +1,8 @@
 'use client'
 
-import { FavouritesLink } from '@/components/MainLayout/Header/FavouritesLink/FavouritesLink'
-import { Logo } from '@/components/MainLayout/Header/Logo/Logo'
-import { SearchBar } from '@/components/MainLayout/Header/SearchBar/SearchBar'
+import { FavouritesLink } from './FavouritesLink/FavouritesLink'
+import { Logo } from './Logo/Logo'
+import { SearchBar } from './SearchBar/SearchBar'
 
 export const Header = () => {
   return (

@@ -13,22 +13,20 @@ const config: Config = {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
       },
-    },
-  },
-  extend: {
-    spacing: {
-      auto: 'auto',
-    },
-    transitionProperty: {
-      all2:
-        'color, background-color, border-color, border-radius, text-decoration-color, fill, stroke, opacity, ' +
-        'box-shadow, transform, filter, backdrop-filter, width, height, margin, padding',
-    },
-    transitionTimingFunction: {
-      DEFAULT: 'ease-in-out',
-    },
-    transitionDuration: {
-      DEFAULT: '200ms',
+      spacing: {
+        auto: 'auto',
+      },
+      transitionProperty: {
+        all2:
+          'color, background-color, border-color, border-radius, text-decoration-color, fill, stroke, opacity, ' +
+          'box-shadow, transform, filter, backdrop-filter, width, height, margin, padding',
+      },
+      transitionTimingFunction: {
+        DEFAULT: 'ease-in-out',
+      },
+      transitionDuration: {
+        DEFAULT: '200ms',
+      },
     },
   },
   plugins: [

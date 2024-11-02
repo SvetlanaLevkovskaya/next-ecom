@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-import { Products } from '@/types'
+import { Product } from '@/types'
 
 export const handleApiError = (error: unknown): string => {
   let errorMessage = 'Unexpected Error'
@@ -36,12 +36,12 @@ instanceAxios.interceptors.response.use(
   }
 )
 
-export async function getProducts(): Promise<Products[]> {
+export async function getProducts(): Promise<Product[]> {
   const response = await instanceAxios.get(`/products`)
   return response.data
 }
 
-export async function getProduct(id: number): Promise<Products> {
+export async function getProduct(id: number): Promise<Product> {
   const response = await instanceAxios.get(`/products/${id}`)
   return response.data
 }
