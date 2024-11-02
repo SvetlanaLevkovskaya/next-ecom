@@ -1,15 +1,20 @@
 'use client'
 
+import { useMemo } from 'react'
 import { FaHeart } from 'react-icons/fa'
 import { useDispatch, useSelector } from 'react-redux'
 
 import clsx from 'clsx'
 
+import { Breadcrumb } from '@/components/Breadcrumb/Breadcrumb'
+
+import { useBreadcrumbs } from '@/hooks/useBreadCrumbs'
+
 import { toggleFavourite } from '@/store/favouritesSlice'
 import { RootState } from '@/store/store'
 
 import { ImageWithFallback } from '@/components'
-import { Products } from '@/types'
+import { BreadcrumbItem, Products } from '@/types'
 import { getStarIcons } from '@/utils'
 
 export const ProductDetails = ({ product }: { product: Products }) => {
@@ -17,11 +22,19 @@ export const ProductDetails = ({ product }: { product: Products }) => {
   const isFavored = useSelector((state: RootState) =>
     state.favourites.items.includes(String(product.id))
   )
+
+  const breadcrumbs: BreadcrumbItem[] = useMemo(
+    () => [{ title: 'Main', path: '/' }, { title: 'Catalog', path: '/' }, { title: product.title }],
+    [product.title]
+  )
+
+  useBreadcrumbs(breadcrumbs)
+
   return (
     <section className="flex flex-col md:flex-row justify-center items-center mx-auto gap-6 my-10">
       <div className="flex flex-col">
         <div className="text-sm pb-16 md:pb-8">
-          Main&#32;{'>'}&#32;Catalog&#32;{'>'}&#32;<strong>{product.title}</strong>
+          <Breadcrumb items={breadcrumbs} />
         </div>
         <div className="flex flex-col md:flex-row items-center justify-center gap-8">
           <div className="w-[206px] h-[206px] flex justify-center items-center flex-shrink-0 my-10">

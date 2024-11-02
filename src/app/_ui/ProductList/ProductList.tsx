@@ -1,16 +1,28 @@
 'use client'
 
-import { ChangeEvent } from 'react'
+import { ChangeEvent, useMemo } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+
+import { Breadcrumb } from '@/components/Breadcrumb/Breadcrumb'
+
+import { useBreadcrumbs } from '@/hooks/useBreadCrumbs'
 
 import { setSelectedCategories, setSortOrder } from '@/store/productsSlice'
 import { RootState } from '@/store/store'
 
 import { ProductCard, categories } from '@/app/_ui'
 import { Spinner } from '@/components'
+import { BreadcrumbItem } from '@/types'
 
 export const ProductList = () => {
   const dispatch = useDispatch()
+
+  const breadcrumbs: BreadcrumbItem[] = useMemo(
+    () => [{ title: 'Main', path: '/' }, { title: 'Catalog' }],
+    []
+  )
+
+  useBreadcrumbs(breadcrumbs)
 
   const { sortOrder, isLoading, error, filteredItems, selectedCategories } = useSelector(
     (state: RootState) => state.products
@@ -53,8 +65,9 @@ export const ProductList = () => {
 
       <section className="w-full md:w-3/4">
         <div className="text-sm mb-10">
-          Main {'>'} <strong>Catalog</strong>
+          <Breadcrumb items={breadcrumbs} />
         </div>
+
         <h1 className="text-xl font-medium mb-6">Catalog</h1>
         <select
           value={sortOrder}

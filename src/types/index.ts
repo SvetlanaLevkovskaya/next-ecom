@@ -1,3 +1,8 @@
+export interface Rate {
+  rate: number
+  count: number
+}
+
 export interface Products {
   id: number
   title: string
@@ -5,11 +10,16 @@ export interface Products {
   category: string
   description: string
   image: string
-  rating: { rate: number; count: number }
+  rating: Rate
 }
 
 export type Params = {
   params: {
     id: number
   }
+}
+
+export type BreadcrumbItem = {
+  title: string
+  path?: string
 }

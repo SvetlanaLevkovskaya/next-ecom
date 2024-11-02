@@ -1,6 +1,6 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 
-import { Products } from '@/types'
+import { BreadcrumbItem, Products } from '@/types'
 
 interface ProductsState {
   items: Products[]
@@ -8,6 +8,7 @@ interface ProductsState {
   searchQuery: string
   sortOrder: 'asc' | 'desc'
   selectedCategories: string[]
+  breadcrumbs: BreadcrumbItem[]
   isLoading: boolean
   error: string | null
 }
@@ -18,6 +19,7 @@ const initialState: ProductsState = {
   searchQuery: '',
   sortOrder: 'asc',
   selectedCategories: [],
+  breadcrumbs: [],
   isLoading: false,
   error: null,
 }
@@ -46,36 +48,40 @@ const productsSlice = createSlice({
   name: 'products',
   initialState,
   reducers: {
-    setProducts: (state, action: PayloadAction<Products[]>) => {
-      state.items = action.payload
+    setBreadcrumbs(state, { payload }: PayloadAction<BreadcrumbItem[]>) {
+      state.breadcrumbs = payload
+    },
+    setProducts: (state, { payload }: PayloadAction<Products[]>) => {
+      state.items = payload
       applyFilters(state)
     },
-    setSearchQuery: (state, action: PayloadAction<string>) => {
-      state.searchQuery = action.payload
+    setSearchQuery: (state, { payload }: PayloadAction<string>) => {
+      state.searchQuery = payload
       applyFilters(state)
-      localStorage.setItem('searchQuery', action.payload)
+      localStorage.setItem('searchQuery', payload)
     },
-    setSortOrder: (state, action: PayloadAction<'asc' | 'desc'>) => {
-      state.sortOrder = action.payload
+    setSortOrder: (state, { payload }: PayloadAction<'asc' | 'desc'>) => {
+      state.sortOrder = payload
       applyFilters(state)
-      localStorage.setItem('sortOrder', action.payload)
+      localStorage.setItem('sortOrder', payload)
     },
-    setSelectedCategories: (state, action: PayloadAction<string[]>) => {
-      state.selectedCategories = action.payload
+    setSelectedCategories: (state, { payload }: PayloadAction<string[]>) => {
+      state.selectedCategories = payload
       applyFilters(state)
-      localStorage.setItem('selectedCategories', JSON.stringify(action.payload))
+      localStorage.setItem('selectedCategories', JSON.stringify(payload))
     },
-    setLoading: (state, action: PayloadAction<boolean>) => {
-      state.isLoading = action.payload
+    setLoading: (state, { payload }: PayloadAction<boolean>) => {
+      state.isLoading = payload
     },
-    setError: (state, action: PayloadAction<string | null>) => {
-      state.error = action.payload
+    setError: (state, { payload }: PayloadAction<string | null>) => {
+      state.error = payload
       state.isLoading = false
     },
   },
 })
 
 export const {
+  setBreadcrumbs,
   setProducts,
   setSearchQuery,
   setSortOrder,
