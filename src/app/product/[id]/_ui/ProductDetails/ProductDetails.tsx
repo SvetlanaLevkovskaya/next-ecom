@@ -13,9 +13,10 @@ import { PurchaseSection } from '@/app/product/[id]/_ui/PurchaseSection/Purchase
 import { BreadcrumbItem, Products } from '@/types'
 
 export const ProductDetails = ({ product }: { product: Products }) => {
+  const { id, title, image, description, price, rating } = product
   const breadcrumbs: BreadcrumbItem[] = useMemo(
-    () => [{ title: 'Main', path: '/' }, { title: 'Catalog', path: '/' }, { title: product.title }],
-    [product.title]
+    () => [{ title: 'Main', path: '/' }, { title: 'Catalog', path: '/' }, { title }],
+    [title]
   )
 
   useBreadcrumbs(breadcrumbs)
@@ -26,20 +27,17 @@ export const ProductDetails = ({ product }: { product: Products }) => {
         <Breadcrumb items={breadcrumbs} className="pb-16 md:pb-8" />
 
         <div className="flex flex-col md:flex-row items-center justify-center gap-8">
-          <ProductImage productImage={product.image} productTitle={product.title} />
+          <ProductImage image={image} title={title} />
 
           <div className="flex flex-col gap-4 w-full md:w-auto divide-y">
             <div>
               <div className="flex flex-col md:flex-row justify-between gap-4">
-                <ProductInfo productTitle={product.title} productRating={product.rating} />
-                <FavouriteButton productId={product.id} />
+                <ProductInfo title={title} rating={rating} />
+                <FavouriteButton id={id} />
               </div>
             </div>
 
-            <PurchaseSection
-              productDescription={product.description}
-              productPrice={product.price}
-            />
+            <PurchaseSection description={description} price={price} />
           </div>
         </div>
       </div>

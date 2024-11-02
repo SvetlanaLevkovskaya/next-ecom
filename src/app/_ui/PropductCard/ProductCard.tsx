@@ -12,20 +12,18 @@ import { RootState } from '@/store/store'
 import { ImageWithFallback } from '@/components'
 import { Products } from '@/types'
 
-export const ProductCard = ({ product }: { product: Products }) => {
+export const ProductCard = ({ id, title, image, category, price }: Products) => {
   const dispatch = useDispatch()
-  const isFavored = useSelector((state: RootState) =>
-    state.favourites.items.includes(String(product.id))
-  )
+  const isFavored = useSelector((state: RootState) => state.favourites.items.includes(String(id)))
 
-  const shouldTruncate = product.title.length > 30
-  const displayedTitle = shouldTruncate ? `${product.title.slice(0, 30)}...` : product.title
+  const shouldTruncate = title.length > 30
+  const displayedTitle = shouldTruncate ? `${title.slice(0, 30)}...` : title
   return (
     <Link
-      href={`/product/${product.id}`}
+      href={`/product/${id}`}
       className="relative flex flex-col justify-between p-4 gap-2.5 outline outline-1 outline-slate-200 border"
     >
-      <p className="text-sm text-gray-500">{product.category}</p>
+      <p className="text-sm text-gray-500">{category}</p>
       <h3 className="text-sm font-medium  min-h-10">{displayedTitle}</h3>
 
       <div className="absolute top-4 right-4">
@@ -35,15 +33,15 @@ export const ProductCard = ({ product }: { product: Products }) => {
           })}
           onClick={(e) => {
             e.preventDefault()
-            dispatch(toggleFavourite(String(product.id)))
+            dispatch(toggleFavourite(String(id)))
           }}
         />
       </div>
 
-      <div className="flex-center-center w-[140px] h-[200px] self-center">
+      <div className="flex-center-center w-[156px] h-[224px] self-center">
         <ImageWithFallback
-          src={product.image}
-          alt={product.title}
+          src={image}
+          alt={title}
           width={100}
           height={100}
           className="object-cover mx-auto w-auto h-auto"
@@ -51,7 +49,7 @@ export const ProductCard = ({ product }: { product: Products }) => {
         />
       </div>
       <div className="mt-auto pt-8">
-        <p className="text-2xl font-black text-gray-900">{product.price}&#32;$</p>
+        <p className="text-2xl font-black text-gray-900">{price}&#32;$</p>
       </div>
     </Link>
   )

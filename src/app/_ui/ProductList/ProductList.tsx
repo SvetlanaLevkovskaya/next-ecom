@@ -38,9 +38,8 @@ export const ProductList = () => {
     <div className="flex flex-col md:flex-row gap-6 max-w-[946px] my-2 md:mx-auto w-full">
       <FilterSection />
       <section className="w-full md:w-3/4">
-        <div className="text-sm mb-10">
-          <Breadcrumb items={breadcrumbs} />
-        </div>
+        <Breadcrumb items={breadcrumbs} className="mb-10" />
+
         <h1 className="text-xl font-medium mb-6">Catalog</h1>
         <select
           value={sortOrder}
@@ -58,7 +57,7 @@ export const ProductList = () => {
         {error && <div>Error: {error}</div>}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 mt-4">
           {filteredItems.map((product) => (
-            <ProductCard key={product.id} product={product} />
+            <ProductCard key={product.id} {...product} />
           ))}
         </div>
       </section>
