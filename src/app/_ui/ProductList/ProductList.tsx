@@ -7,7 +7,7 @@ import { Breadcrumb } from '@/components/Breadcrumb/Breadcrumb'
 
 import { useBreadcrumbs } from '@/hooks/useBreadCrumbs'
 
-import { setSortOrder } from '@/store/productsSlice'
+import { selectFilteredProducts, setSortOrder } from '@/store/productsSlice'
 import { RootState } from '@/store/store'
 
 import { ProductCard } from '@/app/_ui'
@@ -25,9 +25,8 @@ export const ProductList = () => {
 
   useBreadcrumbs(breadcrumbs)
 
-  const { sortOrder, isLoading, error, filteredItems } = useSelector(
-    (state: RootState) => state.products
-  )
+  const { sortOrder, isLoading, error } = useSelector((state: RootState) => state.products)
+  const filteredItems = useSelector(selectFilteredProducts)
 
   const handleSortChange = (event: ChangeEvent<HTMLSelectElement>) => {
     const newSortOrder = event.target.value as 'asc' | 'desc'
