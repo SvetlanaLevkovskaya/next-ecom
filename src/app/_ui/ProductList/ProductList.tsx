@@ -7,10 +7,11 @@ import { Breadcrumb } from '@/components/Breadcrumb/Breadcrumb'
 
 import { useBreadcrumbs } from '@/hooks/useBreadCrumbs'
 
-import { setSelectedCategories, setSortOrder } from '@/store/productsSlice'
+import { setSortOrder } from '@/store/productsSlice'
 import { RootState } from '@/store/store'
 
-import { ProductCard, categories } from '@/app/_ui'
+import { ProductCard } from '@/app/_ui'
+import { FilterSection } from '@/app/_ui/FilterSection/FilterSection'
 import { Spinner } from '@/components'
 import { BreadcrumbItem } from '@/types'
 
@@ -24,7 +25,7 @@ export const ProductList = () => {
 
   useBreadcrumbs(breadcrumbs)
 
-  const { sortOrder, isLoading, error, filteredItems, selectedCategories } = useSelector(
+  const { sortOrder, isLoading, error, filteredItems } = useSelector(
     (state: RootState) => state.products
   )
 
@@ -33,41 +34,13 @@ export const ProductList = () => {
     dispatch(setSortOrder(newSortOrder))
   }
 
-  const handleCategoryChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const category = event.target.value
-    const updatedCategories = selectedCategories.includes(category)
-      ? selectedCategories.filter((c) => c !== category)
-      : [...selectedCategories, category]
-
-    dispatch(setSelectedCategories(updatedCategories))
-  }
   return (
     <div className="flex flex-col md:flex-row gap-6 max-w-[946px] my-2 md:mx-auto w-full">
-      <aside className="w-full md:w-1/4">
-        <h2 className="text-base font-medium mb-8">Filters</h2>
-        {categories &&
-          categories.map((category) => (
-            <div key={category} className="flex items-center mb-2 text-sm transition-all">
-              <input
-                type="checkbox"
-                value={category}
-                id={category}
-                onChange={handleCategoryChange}
-                checked={selectedCategories.includes(category)}
-                className="mr-2 h-3 w-3 accent-yellow-500 focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500 transition-all hover:scale-110"
-              />
-              <label htmlFor={category} className="text-sm">
-                {category}
-              </label>
-            </div>
-          ))}
-      </aside>
-
+      <FilterSection />
       <section className="w-full md:w-3/4">
         <div className="text-sm mb-10">
           <Breadcrumb items={breadcrumbs} />
         </div>
-
         <h1 className="text-xl font-medium mb-6">Catalog</h1>
         <select
           value={sortOrder}

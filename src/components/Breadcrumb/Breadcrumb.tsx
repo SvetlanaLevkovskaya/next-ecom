@@ -1,10 +1,17 @@
+import clsx from 'clsx'
 import Link from 'next/link'
 
 import { BreadcrumbItem } from '@/types'
 
-export const Breadcrumb = ({ items }: { items: BreadcrumbItem[] }) => {
+export const Breadcrumb = ({
+  items,
+  className,
+}: {
+  items: BreadcrumbItem[]
+  className?: string
+}) => {
   return (
-    <nav className="flex items-center">
+    <nav className={clsx('flex items-center text-sm', className)}>
       {items.map((item, index) => {
         return (
           <span key={index} className="flex items-center">
