@@ -25,3 +25,5 @@ export type BreadcrumbItem = {
   title?: string
   path?: string
 }
+
+export type SortOrder = 'asc' | 'desc'

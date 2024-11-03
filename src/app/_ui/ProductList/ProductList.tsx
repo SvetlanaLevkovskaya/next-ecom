@@ -6,6 +6,7 @@ import { useSelector } from 'react-redux'
 import { Breadcrumb } from '@/components/Breadcrumb/Breadcrumb'
 
 import { useBreadcrumbs } from '@/hooks/useBreadCrumbs'
+import { isSortOrder } from '@/utils/isSortOrder'
 
 import { selectFilteredProducts, setSortOrder } from '@/store/productsSlice'
 import { RootState, useAppDispatch } from '@/store/store'
@@ -29,8 +30,10 @@ export const ProductList = () => {
   const filteredItems = useSelector(selectFilteredProducts)
 
   const handleSortChange = (event: ChangeEvent<HTMLSelectElement>) => {
-    const newSortOrder = event.target.value as 'asc' | 'desc'
-    dispatch(setSortOrder(newSortOrder))
+    const newSortOrder = event.target.value
+    if (isSortOrder(newSortOrder)) {
+      dispatch(setSortOrder(newSortOrder))
+    }
   }
 
   return (

@@ -1,36 +1,60 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { ChangeEvent, useEffect, useRef, useState } from 'react'
 
 import Image from 'next/image'
-import { useRouter } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 
 import { useDebounce } from '@/hooks/useDebounce'
 
-import { setSearchQuery } from '@/store/productsSlice'
+import { setSearchQuery, setSelectedCategories, setSortOrder } from '@/store/productsSlice'
 import { useAppDispatch } from '@/store/store'
 
 export const SearchBar = () => {
   const dispatch = useAppDispatch()
   const router = useRouter()
+  const pathname = usePathname()
+  const inputRef = useRef<HTMLInputElement>(null)
 
-  const initialQuery =
+  const [query, setQuery] = useState(() =>
     typeof window !== 'undefined' ? localStorage.getItem('searchQuery') || '' : ''
-
-  const [query, setQuery] = useState(initialQuery)
+  )
   const debouncedQuery = useDebounce(query)
 
   useEffect(() => {
     dispatch(setSearchQuery(debouncedQuery))
-    router.push(`/?search=${encodeURIComponent(debouncedQuery)}`)
+    if (debouncedQuery && pathname !== '/') {
+      router.push('/')
+    }
   }, [debouncedQuery, dispatch, router])
+
+  useEffect(() => {
+    if (pathname !== '/') {
+      setQuery('')
+      dispatch(setSearchQuery(''))
+      dispatch(setSelectedCategories([]))
+      dispatch(setSortOrder('asc'))
+    }
+  }, [pathname, dispatch])
+
+  const handleChangeQuery = (e: ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value
+    setQuery(value.trim())
+  }
+
+  useEffect(() => {
+    if (inputRef.current) {
+      inputRef.current.selectionStart = inputRef.current.selectionEnd = query.length
+    }
+  }, [query])
 
   return (
     <div className="relative max-w-[428px]">
       <input
+        ref={inputRef}
         className="w-[300px] sm:w-[428px] border border-slate-200 focus:border-amber-500 transition-all p-4 pl-6 rounded-lg text-sm placeholder-gray-500 outline-none"
         placeholder="Search"
-        onChange={(e) => setQuery(e.target.value)}
+        onChange={handleChangeQuery}
         value={query}
         autoFocus
       />

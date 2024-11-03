@@ -2,6 +2,8 @@
 
 import { useEffect } from 'react'
 
+import { isSortOrder } from '@/utils/isSortOrder'
+
 import { getProducts } from '@/services/clientApi'
 
 import { setFavourites } from '@/store/favouritesSlice'
@@ -23,8 +25,8 @@ export function DataInitializer() {
       dispatch(setFavourites(JSON.parse(savedFavourites)))
     }
 
-    const savedSortOrder = localStorage.getItem('sortOrder') as 'asc' | 'desc'
-    if (savedSortOrder) {
+    const savedSortOrder = localStorage.getItem('sortOrder')
+    if (isSortOrder(savedSortOrder)) {
       dispatch(setSortOrder(savedSortOrder))
     }
 

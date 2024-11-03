@@ -3,12 +3,12 @@ import { createSelector } from 'reselect'
 
 import { RootState } from '@/store/store'
 
-import { BreadcrumbItem, Product } from '@/types'
+import { BreadcrumbItem, Product, SortOrder } from '@/types'
 
 interface ProductsState {
   items: Product[]
   searchQuery: string
-  sortOrder: 'asc' | 'desc'
+  sortOrder: SortOrder
   selectedCategories: string[]
   breadcrumbs: BreadcrumbItem[]
   isLoading: boolean
@@ -39,7 +39,7 @@ const productsSlice = createSlice({
       state.searchQuery = payload
       localStorage.setItem('searchQuery', payload)
     },
-    setSortOrder: (state, { payload }: PayloadAction<'asc' | 'desc'>) => {
+    setSortOrder: (state, { payload }: PayloadAction<SortOrder>) => {
       state.sortOrder = payload
       localStorage.setItem('sortOrder', payload)
     },
@@ -74,7 +74,6 @@ export const selectFilteredProducts = createSelector(
         product.title.toLowerCase().includes(searchQuery.trim().toLowerCase())
       )
     }
-
     return filtered
       .slice()
       .sort((a, b) => (sortOrder === 'asc' ? a.price - b.price : b.price - a.price))
