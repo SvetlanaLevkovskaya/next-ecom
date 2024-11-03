@@ -1,14 +1,14 @@
 'use client'
 
 import { useEffect } from 'react'
-import { useDispatch } from 'react-redux'
 
 import { setBreadcrumbs } from '@/store/productsSlice'
+import { useAppDispatch } from '@/store/store'
 
 import { BreadcrumbItem } from '@/types'
 
 export const useBreadcrumbs = (items: BreadcrumbItem[]) => {
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch()
 
   useEffect(() => {
     dispatch(setBreadcrumbs(items))

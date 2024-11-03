@@ -1,13 +1,13 @@
 import { ChangeEvent } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 
 import { setSelectedCategories } from '@/store/productsSlice'
-import { RootState } from '@/store/store'
+import { RootState, useAppDispatch } from '@/store/store'
 
 import { categories } from '@/app/_ui'
 
 export const FilterSection = () => {
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch()
   const { selectedCategories } = useSelector((state: RootState) => state.products)
 
   const handleCategoryChange = (event: ChangeEvent<HTMLInputElement>) => {

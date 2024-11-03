@@ -1,38 +1,37 @@
-import { ChangeEvent, KeyboardEvent } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+'use client'
+
+import { useEffect, useState } from 'react'
 
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 
+import { useDebounce } from '@/hooks/useDebounce'
+
 import { setSearchQuery } from '@/store/productsSlice'
-import { RootState } from '@/store/store'
+import { useAppDispatch } from '@/store/store'
 
 export const SearchBar = () => {
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch()
   const router = useRouter()
 
-  const searchQuery = useSelector((state: RootState) => state.products.searchQuery)
+  const initialQuery =
+    typeof window !== 'undefined' ? localStorage.getItem('searchQuery') || '' : ''
 
-  const handleSearchChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const query = event.target.value
-    dispatch(setSearchQuery(query))
-    router.push(`/?search=${encodeURIComponent(searchQuery)}`)
-  }
+  const [query, setQuery] = useState(initialQuery)
+  const debouncedQuery = useDebounce(query)
 
-  const handleKeyPress = (event: KeyboardEvent<HTMLInputElement>) => {
-    if (event.key === 'Enter') {
-      router.push(`/?search=${encodeURIComponent(searchQuery)}`)
-    }
-  }
+  useEffect(() => {
+    dispatch(setSearchQuery(debouncedQuery))
+    router.push(`/?search=${encodeURIComponent(debouncedQuery)}`)
+  }, [debouncedQuery, dispatch, router])
 
   return (
     <div className="relative max-w-[428px]">
       <input
         className="w-[300px] sm:w-[428px] border border-slate-200 focus:border-amber-500 transition-all p-4 pl-6 rounded-lg text-sm placeholder-gray-500 outline-none"
         placeholder="Search"
-        onChange={handleSearchChange}
-        onKeyDown={handleKeyPress}
-        value={searchQuery}
+        onChange={(e) => setQuery(e.target.value)}
+        value={query}
         autoFocus
       />
       <Image

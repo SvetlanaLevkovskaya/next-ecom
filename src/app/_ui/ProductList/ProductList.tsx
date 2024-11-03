@@ -1,14 +1,14 @@
 'use client'
 
 import { ChangeEvent, useMemo } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 
 import { Breadcrumb } from '@/components/Breadcrumb/Breadcrumb'
 
 import { useBreadcrumbs } from '@/hooks/useBreadCrumbs'
 
 import { selectFilteredProducts, setSortOrder } from '@/store/productsSlice'
-import { RootState } from '@/store/store'
+import { RootState, useAppDispatch } from '@/store/store'
 
 import { ProductCard } from '@/app/_ui'
 import { FilterSection } from '@/app/_ui/FilterSection/FilterSection'
@@ -16,7 +16,7 @@ import { Spinner } from '@/components'
 import { BreadcrumbItem } from '@/types'
 
 export const ProductList = () => {
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch()
 
   const breadcrumbs: BreadcrumbItem[] = useMemo(
     () => [{ title: 'Main', path: '/' }, { title: 'Catalog' }],

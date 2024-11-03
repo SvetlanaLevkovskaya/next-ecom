@@ -1,19 +1,19 @@
 'use client'
 
 import { FaHeart } from 'react-icons/fa'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 
 import clsx from 'clsx'
 import Link from 'next/link'
 
 import { toggleFavourite } from '@/store/favouritesSlice'
-import { RootState } from '@/store/store'
+import { RootState, useAppDispatch } from '@/store/store'
 
 import { ImageWithFallback } from '@/components'
 import { OptionalProduct } from '@/types'
 
 export const ProductCard = ({ id, title, image, category, price }: OptionalProduct) => {
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch()
   const isFavored = useSelector((state: RootState) => state.favourites.items.includes(String(id)))
 
   const shouldTruncate = title && title.length > 30

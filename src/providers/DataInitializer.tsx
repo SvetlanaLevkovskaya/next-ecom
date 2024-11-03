@@ -1,7 +1,6 @@
 'use client'
 
 import { useEffect } from 'react'
-import { useDispatch } from 'react-redux'
 
 import { getProducts } from '@/services/clientApi'
 
@@ -10,13 +9,13 @@ import {
   setError,
   setLoading,
   setProducts,
-  setSearchQuery,
   setSelectedCategories,
   setSortOrder,
 } from '@/store/productsSlice'
+import { useAppDispatch } from '@/store/store'
 
 export function DataInitializer() {
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch()
 
   useEffect(() => {
     const savedFavourites = localStorage.getItem('favourites')
@@ -27,11 +26,6 @@ export function DataInitializer() {
     const savedSortOrder = localStorage.getItem('sortOrder') as 'asc' | 'desc'
     if (savedSortOrder) {
       dispatch(setSortOrder(savedSortOrder))
-    }
-
-    const savedSearchQuery = localStorage.getItem('searchQuery')
-    if (savedSearchQuery && savedSearchQuery.trim() !== '') {
-      dispatch(setSearchQuery(savedSearchQuery))
     }
 
     const savedCategories = localStorage.getItem('selectedCategories')
