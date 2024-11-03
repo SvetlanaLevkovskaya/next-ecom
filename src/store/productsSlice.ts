@@ -71,7 +71,7 @@ export const selectFilteredProducts = createSelector(
 
     if (searchQuery.trim()) {
       filtered = filtered.filter((product) =>
-        product.title.toLowerCase().includes(searchQuery.toLowerCase())
+        product.title.toLowerCase().includes(searchQuery.trim().toLowerCase())
       )
     }
 
