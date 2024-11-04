@@ -1,9 +1,7 @@
 'use client'
 
-import { toggleFavourite } from '@/store/favouritesSlice'
-import { useAppDispatch, useAppSelector } from '@/store/store'
-
 import { ImageWithFallback } from '@/components'
+import { toggleFavourite, useAppDispatch, useAppSelector } from '@/store'
 import { getPluralisedItemsText } from '@/utils'
 
 export const FavouriteDetails = () => {

@@ -1,13 +1,12 @@
 'use client'
 
+import { ReactNode } from 'react'
+
 import { usePathname } from 'next/navigation'
 
-import { FavouriteHeader } from '@/components/MainLayout/FavouriteHeader/FavouriteHeader'
-import { Footer } from '@/components/MainLayout/Footer/Footer'
-import { Header } from '@/components/MainLayout/Header/Header'
-import { SubHeader } from '@/components/MainLayout/Subheader/Subheader'
+import { FavouriteHeader, Footer, Header, SubHeader } from '@/components/MainLayout'
 
-export const MainLayout = ({ children }: { children: React.ReactNode }) => {
+export const MainLayout = ({ children }: { children: ReactNode }) => {
   const pathname = usePathname()
   return (
     <div className="flex flex-col min-h-dvh">

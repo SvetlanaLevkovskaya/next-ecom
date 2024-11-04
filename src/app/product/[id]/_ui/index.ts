@@ -1,1 +1,5 @@
 export * from './ProductDetails/ProductDetails'
+export * from './FavouriteButton/FavouriteButton'
+export * from './ProductImage/ProductImage'
+export * from './ProductInfo/ProductInfo'
+export * from './PurchaseSection/PurchaseSection'

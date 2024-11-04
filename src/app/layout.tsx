@@ -6,7 +6,7 @@ import { Manrope } from 'next/font/google'
 import './globals.css'
 
 import { MainLayout, Spinner } from '@/components'
-import { StoreProvider } from '@/providers/StoreProvider'
+import { StoreProvider } from '@/providers'
 
 const manrope = Manrope({ subsets: ['latin'] })
 

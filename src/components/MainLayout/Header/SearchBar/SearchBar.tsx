@@ -5,10 +5,8 @@ import { ChangeEvent, memo, useEffect, useRef, useState } from 'react'
 import Image from 'next/image'
 import { usePathname, useRouter } from 'next/navigation'
 
-import { useDebounce } from '@/hooks/useDebounce'
-
-import { setSearchQuery, setSelectedCategories, setSortOrder } from '@/store/productsSlice'
-import { useAppDispatch } from '@/store/store'
+import { useDebounce } from '@/hooks'
+import { setSearchQuery, setSelectedCategories, setSortOrder, useAppDispatch } from '@/store'
 
 const SearchBarComponent = () => {
   const dispatch = useAppDispatch()

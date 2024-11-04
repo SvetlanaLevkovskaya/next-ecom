@@ -2,6 +2,7 @@ import { useDispatch, useSelector, useStore } from 'react-redux'
 
 import { configureStore } from '@reduxjs/toolkit'
 
+import breadcrumbReducer from '@/store/breadcrumbSlice'
 import favouritesReducer from '@/store/favouritesSlice'
 import { localStorageMiddleware } from '@/store/localStorageMiddleware'
 import productsReducer from '@/store/productsSlice'
@@ -11,6 +12,7 @@ export const makeStore = () => {
     reducer: {
       favourites: favouritesReducer,
       products: productsReducer,
+      breadcrumbs: breadcrumbReducer,
     },
     middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(localStorageMiddleware),
   })

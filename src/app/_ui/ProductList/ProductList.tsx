@@ -2,17 +2,12 @@
 
 import { useMemo } from 'react'
 
-import { Breadcrumb } from '@/components/Breadcrumb/Breadcrumb'
-
-import { useBreadcrumbs } from '@/hooks/useBreadCrumbs'
-
-import { selectFilteredProducts } from '@/store/productsSlice'
-import { useAppSelector } from '@/store/store'
-
 import { ProductCard } from '@/app/_ui'
 import { FilterSection } from '@/app/_ui/FilterSection/FilterSection'
 import { SortSelect } from '@/app/_ui/SortSelect/SortSelect'
-import { Spinner } from '@/components'
+import { Breadcrumb, Spinner } from '@/components'
+import { useBreadcrumbs } from '@/hooks'
+import { selectFilteredProducts, useAppSelector } from '@/store'
 import { BreadcrumbItem } from '@/types'
 
 export const ProductList = () => {

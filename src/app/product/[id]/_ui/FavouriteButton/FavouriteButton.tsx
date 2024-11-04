@@ -1,10 +1,10 @@
+'use client'
+
 import { FaHeart } from 'react-icons/fa'
 
 import clsx from 'clsx'
 
-import { toggleFavourite } from '@/store/favouritesSlice'
-import { useAppDispatch, useAppSelector } from '@/store/store'
-
+import { toggleFavourite, useAppDispatch, useAppSelector } from '@/store'
 import { OptionalProduct } from '@/types'
 
 export const FavouriteButton = ({ id }: OptionalProduct) => {

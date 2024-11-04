@@ -2,14 +2,9 @@
 
 import { useMemo } from 'react'
 
-import { Breadcrumb } from '@/components/Breadcrumb/Breadcrumb'
-
-import { useBreadcrumbs } from '@/hooks/useBreadCrumbs'
-
-import { FavouriteButton } from '@/app/product/[id]/_ui/FavouriteButton/FavouriteButton'
-import { ProductImage } from '@/app/product/[id]/_ui/ProductImage/ProductImage'
-import { ProductInfo } from '@/app/product/[id]/_ui/ProductInfo/ProductInfo'
-import { PurchaseSection } from '@/app/product/[id]/_ui/PurchaseSection/PurchaseSection'
+import { FavouriteButton, ProductImage, ProductInfo, PurchaseSection } from '@/app/product/[id]/_ui'
+import { Breadcrumb } from '@/components'
+import { useBreadcrumbs } from '@/hooks'
 import { BreadcrumbItem, OptionalProduct } from '@/types'
 
 export const ProductDetails = ({ product }: { product: OptionalProduct }) => {

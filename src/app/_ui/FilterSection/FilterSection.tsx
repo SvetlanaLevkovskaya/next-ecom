@@ -1,9 +1,7 @@
 import { ChangeEvent, memo } from 'react'
 
-import { setSelectedCategories } from '@/store/productsSlice'
-import { useAppDispatch, useAppSelector } from '@/store/store'
-
-import { categories } from '@/app/_ui'
+import { CATEGORIES } from '@/app/_ui'
+import { setSelectedCategories, useAppDispatch, useAppSelector } from '@/store'
 
 const FilterSectionComponent = () => {
   const dispatch = useAppDispatch()
@@ -20,8 +18,8 @@ const FilterSectionComponent = () => {
   return (
     <aside className="w-full md:w-1/4">
       <h2 className="text-base font-medium mb-8">Filters</h2>
-      {categories &&
-        categories.map((category) => (
+      {CATEGORIES &&
+        CATEGORIES.map((category) => (
           <div key={category} className="flex items-center mb-2 text-sm transition-all">
             <input
               type="checkbox"

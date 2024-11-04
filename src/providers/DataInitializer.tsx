@@ -2,19 +2,19 @@
 
 import { useEffect } from 'react'
 
-import { isSortOrder } from '@/utils/isSortOrder'
-
 import { getProducts } from '@/services/clientApi'
 
-import { setFavourites } from '@/store/favouritesSlice'
+import { useAppDispatch } from '@/store/store'
+
 import {
   setError,
+  setFavourites,
   setLoading,
   setProducts,
   setSelectedCategories,
   setSortOrder,
-} from '@/store/productsSlice'
-import { useAppDispatch } from '@/store/store'
+} from '@/store'
+import { isSortOrder } from '@/utils'
 
 export function DataInitializer() {
   const dispatch = useAppDispatch()

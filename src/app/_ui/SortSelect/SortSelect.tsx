@@ -2,10 +2,8 @@
 
 import { ChangeEvent, memo } from 'react'
 
-import { isSortOrder } from '@/utils/isSortOrder'
-
-import { setSortOrder } from '@/store/productsSlice'
-import { useAppDispatch, useAppSelector } from '@/store/store'
+import { setSortOrder, useAppDispatch, useAppSelector } from '@/store'
+import { isSortOrder } from '@/utils'
 
 const SortSelectComponent = () => {
   const dispatch = useAppDispatch()

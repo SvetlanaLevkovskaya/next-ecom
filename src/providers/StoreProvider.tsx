@@ -3,9 +3,8 @@
 import { ReactNode, useRef } from 'react'
 import { Provider } from 'react-redux'
 
-import { AppStore, makeStore } from '@/store/store'
-
 import { DataInitializer } from '@/providers/DataInitializer'
+import { AppStore, makeStore } from '@/store'
 
 export function StoreProvider({ children }: { children: ReactNode }) {
   const storeRef = useRef<AppStore>()
