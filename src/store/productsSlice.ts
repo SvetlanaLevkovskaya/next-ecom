@@ -3,14 +3,13 @@ import { createSelector } from 'reselect'
 
 import { RootState } from '@/store/store'
 
-import { BreadcrumbItem, Product, SortOrder } from '@/types'
+import { Product, SortOrder } from '@/types'
 
 interface ProductsState {
   items: Product[]
   searchQuery: string
   sortOrder: SortOrder
   selectedCategories: string[]
-  breadcrumbs: BreadcrumbItem[]
   isLoading: boolean
   error: string | null
 }
@@ -20,7 +19,6 @@ const initialState: ProductsState = {
   searchQuery: '',
   sortOrder: 'asc',
   selectedCategories: [],
-  breadcrumbs: [],
   isLoading: false,
   error: null,
 }
@@ -29,9 +27,6 @@ const productsSlice = createSlice({
   name: 'products',
   initialState,
   reducers: {
-    setBreadcrumbs(state, { payload }: PayloadAction<BreadcrumbItem[]>) {
-      state.breadcrumbs = payload
-    },
     setProducts: (state, { payload }: PayloadAction<Product[]>) => {
       state.items = payload
     },
@@ -80,7 +75,6 @@ export const selectFilteredProducts = createSelector(
   }
 )
 export const {
-  setBreadcrumbs,
   setProducts,
   setSearchQuery,
   setSortOrder,

@@ -1,4 +1,4 @@
-import { ChangeEvent } from 'react'
+import { ChangeEvent, memo } from 'react'
 import { useSelector } from 'react-redux'
 
 import { setSelectedCategories } from '@/store/productsSlice'
@@ -6,7 +6,7 @@ import { RootState, useAppDispatch } from '@/store/store'
 
 import { categories } from '@/app/_ui'
 
-export const FilterSection = () => {
+const FilterSectionComponent = () => {
   const dispatch = useAppDispatch()
   const { selectedCategories } = useSelector((state: RootState) => state.products)
 
@@ -40,3 +40,7 @@ export const FilterSection = () => {
     </aside>
   )
 }
+
+FilterSectionComponent.displayName = 'FilterSection'
+
+export const FilterSection = memo(FilterSectionComponent)

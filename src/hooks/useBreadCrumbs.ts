@@ -2,7 +2,7 @@
 
 import { useEffect } from 'react'
 
-import { setBreadcrumbs } from '@/store/productsSlice'
+import { setBreadcrumbs } from '@/store/breadcrumbSlice'
 import { useAppDispatch } from '@/store/store'
 
 import { BreadcrumbItem } from '@/types'

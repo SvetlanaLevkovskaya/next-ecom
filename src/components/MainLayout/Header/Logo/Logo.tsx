@@ -1,7 +1,9 @@
+import { memo } from 'react'
+
 import Image from 'next/image'
 import Link from 'next/link'
 
-export const Logo = () => {
+const LogoComponent = () => {
   return (
     <Link href={'/'}>
       <Image
@@ -16,3 +18,7 @@ export const Logo = () => {
     </Link>
   )
 }
+
+LogoComponent.displayName = 'Logo'
+
+export const Logo = memo(LogoComponent)

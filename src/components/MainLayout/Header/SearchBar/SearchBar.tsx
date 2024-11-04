@@ -1,6 +1,6 @@
 'use client'
 
-import { ChangeEvent, useEffect, useRef, useState } from 'react'
+import { ChangeEvent, memo, useEffect, useRef, useState } from 'react'
 
 import Image from 'next/image'
 import { usePathname, useRouter } from 'next/navigation'
@@ -10,7 +10,7 @@ import { useDebounce } from '@/hooks/useDebounce'
 import { setSearchQuery, setSelectedCategories, setSortOrder } from '@/store/productsSlice'
 import { useAppDispatch } from '@/store/store'
 
-export const SearchBar = () => {
+const SearchBarComponent = () => {
   const dispatch = useAppDispatch()
   const router = useRouter()
   const pathname = usePathname()
@@ -26,7 +26,7 @@ export const SearchBar = () => {
     if (debouncedQuery && pathname !== '/') {
       router.push('/')
     }
-  }, [debouncedQuery, dispatch, router])
+  }, [debouncedQuery, dispatch, pathname, router])
 
   useEffect(() => {
     if (pathname !== '/') {
@@ -35,7 +35,7 @@ export const SearchBar = () => {
       dispatch(setSelectedCategories([]))
       dispatch(setSortOrder('asc'))
     }
-  }, [pathname, dispatch])
+  }, [dispatch, pathname])
 
   const handleChangeQuery = (e: ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value
@@ -71,3 +71,7 @@ export const SearchBar = () => {
     </div>
   )
 }
+
+SearchBarComponent.displayName = 'SearchBar'
+
+export const SearchBar = memo(SearchBarComponent)
