@@ -1,13 +1,12 @@
 import { FaHeart } from 'react-icons/fa'
-import { useSelector } from 'react-redux'
 
 import clsx from 'clsx'
 import Link from 'next/link'
 
-import { RootState } from '@/store/store'
+import { useAppSelector } from '@/store/store'
 
 export const FavouritesLink = () => {
-  const favouritesCount = useSelector((state: RootState) => state.favourites.items.length)
+  const favouritesCount = useAppSelector((state) => state.favourites.items.length)
   return (
     <Link href="/favourite" passHref className="flex flex-col items-center gap-[1px]">
       <FaHeart

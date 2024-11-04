@@ -1,14 +1,13 @@
 'use client'
 
 import { useMemo } from 'react'
-import { useSelector } from 'react-redux'
 
 import { Breadcrumb } from '@/components/Breadcrumb/Breadcrumb'
 
 import { useBreadcrumbs } from '@/hooks/useBreadCrumbs'
 
 import { selectFilteredProducts } from '@/store/productsSlice'
-import { RootState } from '@/store/store'
+import { useAppSelector } from '@/store/store'
 
 import { ProductCard } from '@/app/_ui'
 import { FilterSection } from '@/app/_ui/FilterSection/FilterSection'
@@ -24,8 +23,8 @@ export const ProductList = () => {
 
   useBreadcrumbs(breadcrumbs)
 
-  const { isLoading, error } = useSelector((state: RootState) => state.products)
-  const filteredItems = useSelector(selectFilteredProducts)
+  const { isLoading, error } = useAppSelector((state) => state.products)
+  const filteredItems = useAppSelector(selectFilteredProducts)
 
   return (
     <div className="flex flex-col md:flex-row gap-6 max-w-[946px] my-2 md:mx-auto w-full">

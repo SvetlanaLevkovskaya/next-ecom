@@ -1,18 +1,24 @@
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector, useStore } from 'react-redux'
 
 import { configureStore } from '@reduxjs/toolkit'
 
 import favouritesReducer from '@/store/favouritesSlice'
+import { localStorageMiddleware } from '@/store/localStorageMiddleware'
 import productsReducer from '@/store/productsSlice'
 
-export const store = configureStore({
-  reducer: {
-    favourites: favouritesReducer,
-    products: productsReducer,
-  },
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware(),
-})
+export const makeStore = () => {
+  return configureStore({
+    reducer: {
+      favourites: favouritesReducer,
+      products: productsReducer,
+    },
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(localStorageMiddleware),
+  })
+}
 
-export type RootState = ReturnType<typeof store.getState>
-export type AppDispatch = typeof store.dispatch
-export const useAppDispatch = () => useDispatch<AppDispatch>()
+export type AppStore = ReturnType<typeof makeStore>
+export type RootState = ReturnType<AppStore['getState']>
+export type AppDispatch = AppStore['dispatch']
+export const useAppDispatch = useDispatch.withTypes<AppDispatch>()
+export const useAppSelector = useSelector.withTypes<RootState>()
+export const useAppStore = useStore.withTypes<AppStore>()

@@ -1,14 +1,13 @@
 import { ChangeEvent, memo } from 'react'
-import { useSelector } from 'react-redux'
 
 import { setSelectedCategories } from '@/store/productsSlice'
-import { RootState, useAppDispatch } from '@/store/store'
+import { useAppDispatch, useAppSelector } from '@/store/store'
 
 import { categories } from '@/app/_ui'
 
 const FilterSectionComponent = () => {
   const dispatch = useAppDispatch()
-  const { selectedCategories } = useSelector((state: RootState) => state.products)
+  const { selectedCategories } = useAppSelector((state) => state.products)
 
   const handleCategoryChange = (event: ChangeEvent<HTMLInputElement>) => {
     const category = event.target.value

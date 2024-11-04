@@ -32,15 +32,12 @@ const productsSlice = createSlice({
     },
     setSearchQuery: (state, { payload }: PayloadAction<string>) => {
       state.searchQuery = payload
-      localStorage.setItem('searchQuery', payload)
     },
     setSortOrder: (state, { payload }: PayloadAction<SortOrder>) => {
       state.sortOrder = payload
-      localStorage.setItem('sortOrder', payload)
     },
     setSelectedCategories: (state, { payload }: PayloadAction<string[]>) => {
       state.selectedCategories = payload
-      localStorage.setItem('selectedCategories', JSON.stringify(payload))
     },
     setLoading: (state, { payload }: PayloadAction<boolean>) => {
       state.isLoading = payload
@@ -53,27 +50,27 @@ const productsSlice = createSlice({
 })
 
 export const selectFilteredProducts = createSelector(
-  (state: RootState) => state.products.items || [],
-  (state: RootState) => state.products.selectedCategories || [],
-  (state: RootState) => state.products.searchQuery || '',
-  (state: RootState) => state.products.sortOrder || 'asc',
+  (state: RootState) => state.products.items,
+  (state: RootState) => state.products.selectedCategories,
+  (state: RootState) => state.products.searchQuery,
+  (state: RootState) => state.products.sortOrder,
   (items, selectedCategories, searchQuery, sortOrder) => {
-    let filtered = items
-
-    if (selectedCategories.length > 0) {
-      filtered = filtered.filter((product) => selectedCategories.includes(product.category))
-    }
+    let filtered = selectedCategories.length
+      ? items.filter((product) => selectedCategories.includes(product.category))
+      : items
 
     if (searchQuery.trim()) {
       filtered = filtered.filter((product) =>
         product.title.toLowerCase().includes(searchQuery.trim().toLowerCase())
       )
     }
-    return filtered
-      .slice()
-      .sort((a, b) => (sortOrder === 'asc' ? a.price - b.price : b.price - a.price))
+
+    return [...filtered].sort((a, b) =>
+      sortOrder === 'asc' ? a.price - b.price : b.price - a.price
+    )
   }
 )
+
 export const {
   setProducts,
   setSearchQuery,

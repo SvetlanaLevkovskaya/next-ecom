@@ -1,17 +1,15 @@
 'use client'
 
-import { useSelector } from 'react-redux'
-
 import { toggleFavourite } from '@/store/favouritesSlice'
-import { RootState, useAppDispatch } from '@/store/store'
+import { useAppDispatch, useAppSelector } from '@/store/store'
 
 import { ImageWithFallback } from '@/components'
 import { getPluralisedItemsText } from '@/utils'
 
 export const FavouriteDetails = () => {
   const dispatch = useAppDispatch()
-  const favouriteItems = useSelector((state: RootState) => state.favourites.items)
-  const allProducts = useSelector((state: RootState) => state.products.items)
+  const favouriteItems = useAppSelector((state) => state.favourites.items)
+  const allProducts = useAppSelector((state) => state.products.items)
 
   const favouriteProducts = allProducts.filter(({ id }) => favouriteItems.includes(String(id)))
 

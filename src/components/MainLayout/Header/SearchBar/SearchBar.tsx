@@ -26,7 +26,7 @@ const SearchBarComponent = () => {
     if (debouncedQuery && pathname !== '/') {
       router.push('/')
     }
-  }, [debouncedQuery, dispatch, pathname, router])
+  }, [debouncedQuery, dispatch, router])
 
   useEffect(() => {
     if (pathname !== '/') {

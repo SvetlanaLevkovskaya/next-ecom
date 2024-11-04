@@ -1,21 +1,17 @@
 import { FaHeart } from 'react-icons/fa'
-import { shallowEqual, useDispatch, useSelector } from 'react-redux'
 
 import clsx from 'clsx'
 
 import { toggleFavourite } from '@/store/favouritesSlice'
-import { RootState } from '@/store/store'
+import { useAppDispatch, useAppSelector } from '@/store/store'
 
 interface FavouriteIconProps {
   productId: string
 }
 
 export const FavouriteIcon = ({ productId }: FavouriteIconProps) => {
-  const dispatch = useDispatch()
-  const isFavored = useSelector(
-    (state: RootState) => state.favourites.items.includes(productId),
-    shallowEqual
-  )
+  const dispatch = useAppDispatch()
+  const isFavored = useAppSelector((state) => state.favourites.items.includes(productId))
 
   return (
     <div className="absolute top-4 right-4">

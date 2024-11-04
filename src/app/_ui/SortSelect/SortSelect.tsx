@@ -1,16 +1,15 @@
 'use client'
 
 import { ChangeEvent, memo } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
 
 import { isSortOrder } from '@/utils/isSortOrder'
 
 import { setSortOrder } from '@/store/productsSlice'
-import { RootState } from '@/store/store'
+import { useAppDispatch, useAppSelector } from '@/store/store'
 
 const SortSelectComponent = () => {
-  const dispatch = useDispatch()
-  const sortOrder = useSelector((state: RootState) => state.products.sortOrder)
+  const dispatch = useAppDispatch()
+  const sortOrder = useAppSelector((state) => state.products.sortOrder)
 
   const handleSortChange = (event: ChangeEvent<HTMLSelectElement>) => {
     const newSortOrder = event.target.value
