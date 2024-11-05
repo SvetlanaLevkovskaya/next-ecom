@@ -1,4 +1,4 @@
-import { memo } from 'react'
+import { Fragment, memo } from 'react'
 
 import clsx from 'clsx'
 import Link from 'next/link'
@@ -15,7 +15,7 @@ const BreadcrumbComponent = ({
   return (
     <nav className={clsx('flex items-center text-sm', className)}>
       {items.map((item, index) => (
-        <span key={index} className="flex items-center">
+        <Fragment key={index}>
           {item.path ? (
             <Link href={item.path} className="hover:text-gray-700 transition-all">
               {item.title}
@@ -24,7 +24,7 @@ const BreadcrumbComponent = ({
             <span className="text-black font-black">{item.title}</span>
           )}
           {index < items.length - 1 && <div className="px-1">{'>'}</div>}
-        </span>
+        </Fragment>
       ))}
     </nav>
   )

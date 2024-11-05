@@ -2,6 +2,7 @@ import { OptionalProduct } from '@/types'
 import { getStarIcons } from '@/utils'
 
 export const ProductInfo = ({ title, rating }: OptionalProduct) => {
+  if (!title || !rating) return null
   return (
     <div>
       <h2 className="text-xl font-bold">{title}</h2>

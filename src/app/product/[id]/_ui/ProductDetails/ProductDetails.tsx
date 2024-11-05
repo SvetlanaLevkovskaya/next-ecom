@@ -16,6 +16,14 @@ export const ProductDetails = ({ product }: { product: OptionalProduct }) => {
 
   useBreadcrumbs(breadcrumbs)
 
+  if (!product) {
+    return (
+      <section className="flex justify-center items-center mx-auto my-10 text-sm">
+        Product not found.
+      </section>
+    )
+  }
+
   return (
     <section className="flex flex-col md:flex-row justify-center items-center mx-auto gap-6 my-10">
       <div className="flex flex-col">

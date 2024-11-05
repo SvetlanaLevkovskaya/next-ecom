@@ -10,10 +10,15 @@ import { OptionalProduct } from '@/types'
 export const FavouriteButton = ({ id }: OptionalProduct) => {
   const dispatch = useAppDispatch()
   const isFavored = useAppSelector((state) => state.favourites.items.includes(String(id)))
+
+  if (!id) return null
+
   return (
     <button
-      onClick={() => dispatch(toggleFavourite(String(id)))}
+      type="button"
       className="flex-center-center gap-3 w-48 border border-slate-200 h-9 px-2 text-sm rounded-md hover:bg-gray-100 transition-all whitespace-nowrap"
+      aria-label="Toggle Favourite"
+      onClick={() => dispatch(toggleFavourite(String(id)))}
     >
       <span>{isFavored ? 'Remove from Favourite' : 'Add to Favourite'}</span>
       <FaHeart

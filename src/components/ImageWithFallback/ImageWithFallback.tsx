@@ -1,6 +1,6 @@
 'use client'
 
-import { ReactElement, SyntheticEvent, useEffect, useState } from 'react'
+import { ReactElement, useEffect, useState } from 'react'
 
 import Image, { ImageProps } from 'next/image'
 
@@ -31,12 +31,16 @@ export const ImageWithFallback = (props: Props): ReactElement => {
     setImageState((prev) => ({ ...prev, isLoaded: true }))
   }
 
-  const handleError = ({ currentTarget }: SyntheticEvent<HTMLImageElement>) => {
-    currentTarget.onerror = null
-    setImageState({
-      url: notAvailable?.src,
-      isLoaded: false,
-      hasError: true,
+  const handleError = () => {
+    setImageState((prev) => {
+      if (!prev.hasError) {
+        return {
+          url: notAvailable?.src,
+          isLoaded: false,
+          hasError: true,
+        }
+      }
+      return prev
     })
   }
 

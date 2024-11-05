@@ -1,6 +1,7 @@
 import { OptionalProduct } from '@/types'
 
 export const PurchaseSection = ({ description, price }: OptionalProduct) => {
+  if (!description || !price) return null
   return (
     <div>
       <div className="flex flex-col md:flex-row items-start md:items-center gap-6 mt-10">

@@ -7,10 +7,11 @@ import Link from 'next/link'
 import { FavouriteIcon } from '@/app/_ui/FavouriteIcon/FavouriteIcon'
 import { ProductCardImage } from '@/app/_ui/ProductCardImage/ProductCardImage'
 import { OptionalProduct } from '@/types'
+import { truncateTitle } from '@/utils'
 
 const ProductCardComponent = ({ id, title, image, category, price }: OptionalProduct) => {
-  const shouldTruncate = title && title.length > 30
-  const displayedTitle = shouldTruncate ? `${title.slice(0, 30)}...` : title
+  if (!id || !title || !image || !category || price == null) return null
+  const displayedTitle = truncateTitle(title, 30)
   return (
     <Link
       href={`/product/${id}`}
@@ -19,12 +20,12 @@ const ProductCardComponent = ({ id, title, image, category, price }: OptionalPro
       <p className="text-sm text-gray-500">{category}</p>
       <h3 className="text-sm font-medium  min-h-10">{displayedTitle}</h3>
 
-      <FavouriteIcon productId={String(id)} />
+      <FavouriteIcon id={String(id)} />
       <ProductCardImage title={title} image={image} />
 
-      <div className="mt-auto pt-8">
-        <p className="text-2xl font-black text-gray-900">{price}&#32;$</p>
-      </div>
+      <p className="text-2xl font-black text-gray-900">
+        {price && `${new Intl.NumberFormat('en-US').format(price)} $`}
+      </p>
     </Link>
   )
 }

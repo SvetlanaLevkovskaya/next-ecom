@@ -1,6 +1,6 @@
 'use client'
 
-import { useMemo } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 
 import { ProductCard } from '@/app/_ui'
 import { FilterSection } from '@/app/_ui/FilterSection/FilterSection'
@@ -11,6 +11,7 @@ import { selectFilteredProducts, useAppSelector } from '@/store'
 import { BreadcrumbItem } from '@/types'
 
 export const ProductList = () => {
+  const [hasLoaded, setHasLoaded] = useState(false)
   const breadcrumbs: BreadcrumbItem[] = useMemo(
     () => [{ title: 'Main', path: '/' }, { title: 'Catalog' }],
     []
@@ -20,6 +21,15 @@ export const ProductList = () => {
 
   const { isLoading, error } = useAppSelector((state) => state.products)
   const filteredItems = useAppSelector(selectFilteredProducts)
+
+  useEffect(() => {
+    if (!isLoading) {
+      setHasLoaded(true)
+    }
+  }, [isLoading])
+
+  const shouldShowNoProductsMessage = hasLoaded && !isLoading && filteredItems.length === 0
+  const shouldShowProducts = filteredItems.length > 0
 
   return (
     <div className="flex flex-col md:flex-row gap-6 max-w-[946px] my-2 md:mx-auto w-full">
@@ -33,11 +43,18 @@ export const ProductList = () => {
 
         {isLoading && <Spinner />}
         {error && <div>Error: {error}</div>}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 mt-4">
-          {filteredItems.map((product) => (
-            <ProductCard key={product.id} {...product} />
-          ))}
-        </div>
+
+        {shouldShowNoProductsMessage && (
+          <div className="text-center text-sm mt-4">No products available.</div>
+        )}
+
+        {shouldShowProducts && (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 mt-4">
+            {filteredItems.map((product) => (
+              <ProductCard key={product.id} {...product} />
+            ))}
+          </div>
+        )}
       </section>
     </div>
   )
