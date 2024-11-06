@@ -9,7 +9,7 @@ export const FavouriteDetails = () => {
   const favouriteItems = useAppSelector((state) => state.favourites.items)
   const allProducts = useAppSelector((state) => state.products.items)
 
-  const favouriteProducts = allProducts.filter(({ id }) => favouriteItems.includes(String(id)))
+  const favouriteProducts = allProducts.filter(({ id }) => favouriteItems[id])
 
   const formattedItemsText = getPluralisedItemsText(favouriteProducts.length)
 

@@ -9,7 +9,8 @@ import { OptionalProduct } from '@/types'
 
 export const FavouriteButton = ({ id }: OptionalProduct) => {
   const dispatch = useAppDispatch()
-  const isFavored = useAppSelector((state) => state.favourites.items.includes(String(id)))
+
+  const isFavored = useAppSelector((state) => (id ? state.favourites.items[id] : false))
 
   if (!id) return null
 

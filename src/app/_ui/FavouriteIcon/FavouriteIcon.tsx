@@ -10,7 +10,7 @@ interface FavouriteIconProps {
 
 export const FavouriteIcon = ({ id }: FavouriteIconProps) => {
   const dispatch = useAppDispatch()
-  const isFavored = useAppSelector((state) => state.favourites.items.includes(id))
+  const isFavored = useAppSelector((state) => state.favourites.items[id])
 
   if (!id) return null
 
