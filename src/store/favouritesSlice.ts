@@ -1,4 +1,7 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
+import { createSelector } from 'reselect'
+
+import { RootState } from '@/store/store'
 
 interface FavouritesState {
   items: Record<string, boolean>
@@ -31,6 +34,12 @@ const favouritesSlice = createSlice({
     },
   },
 })
+
+export const selectFavouriteProducts = createSelector(
+  (state: RootState) => state.products.items,
+  (state: RootState) => state.favourites.items,
+  (products, favourites) => products.filter(({ id }) => favourites[id])
+)
 
 export const { setFavourites, toggleFavourite } = favouritesSlice.actions
 export default favouritesSlice.reducer

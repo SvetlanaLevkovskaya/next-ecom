@@ -1,15 +1,13 @@
 'use client'
 
 import { ImageWithFallback } from '@/components'
-import { toggleFavourite, useAppDispatch, useAppSelector } from '@/store'
+import { selectFavouriteProducts, toggleFavourite, useAppDispatch, useAppSelector } from '@/store'
 import { getPluralisedItemsText } from '@/utils'
 
 export const FavouriteDetails = () => {
   const dispatch = useAppDispatch()
-  const favouriteItems = useAppSelector((state) => state.favourites.items)
-  const allProducts = useAppSelector((state) => state.products.items)
 
-  const favouriteProducts = allProducts.filter(({ id }) => favouriteItems[id])
+  const favouriteProducts = useAppSelector(selectFavouriteProducts)
 
   const formattedItemsText = getPluralisedItemsText(favouriteProducts.length)
 
