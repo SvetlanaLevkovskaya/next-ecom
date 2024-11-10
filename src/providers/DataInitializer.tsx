@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect } from 'react'
+import { useEffect, useRef } from 'react'
 
 import { getProducts } from '@/services/clientApi'
 
@@ -18,8 +18,14 @@ import { isSortOrder } from '@/utils'
 
 export function DataInitializer() {
   const dispatch = useAppDispatch()
+  const isFetching = useRef(false)
 
   useEffect(() => {
+    if (isFetching.current) return
+
+    console.log('Инициализация данных: запрос продуктов')
+    isFetching.current = true
+
     const savedFavourites = localStorage.getItem('favourites')
     if (savedFavourites) {
       dispatch(setFavourites(JSON.parse(savedFavourites)))
@@ -36,20 +42,21 @@ export function DataInitializer() {
     }
 
     const fetchProducts = async () => {
+      dispatch(setLoading(true))
       try {
-        dispatch(setLoading(true))
-
         const products = await getProducts()
         dispatch(setProducts(products))
-
-        dispatch(setLoading(false))
       } catch (error) {
         dispatch(setError(`Failed to fetch products: ${error}`))
         console.error('Failed to fetch products:', error)
+      } finally {
+        dispatch(setLoading(false))
+        isFetching.current = false
       }
     }
 
     fetchProducts()
   }, [dispatch])
+
   return null
 }
