@@ -6,12 +6,12 @@ import { deleteProductAPI } from '@/services/clientApi'
 import { toggleFavourite } from '@/store/favouritesSlice'
 import { RootState } from '@/store/store'
 
-import { Product, SortOrder } from '@/types'
+import { Product, SortOrderType } from '@/types'
 
 interface ProductsState {
   products: Product[]
   searchQuery: string
-  sortOrder: SortOrder
+  sortOrder: SortOrderType
   selectedCategories: string[]
   isLoading: boolean
   error: string | null
@@ -49,7 +49,7 @@ const productsSlice = createSlice({
     setSearchQuery: (state, { payload }: PayloadAction<string>) => {
       state.searchQuery = payload
     },
-    setSortOrder: (state, { payload }: PayloadAction<SortOrder>) => {
+    setSortOrder: (state, { payload }: PayloadAction<SortOrderType>) => {
       state.sortOrder = payload
     },
     setSelectedCategories: (state, { payload }: PayloadAction<string[]>) => {
@@ -78,7 +78,6 @@ export const selectFilteredProducts = createSelector(
   (state: RootState) => state.products.searchQuery,
   (state: RootState) => state.products.sortOrder,
   (products, selectedCategories, searchQuery, sortOrder) => {
-    console.log('Products:', products)
     let filtered = selectedCategories.length
       ? products.filter((product) => selectedCategories.includes(product.category))
       : products

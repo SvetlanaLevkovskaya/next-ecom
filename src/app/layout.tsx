@@ -1,3 +1,5 @@
+import { ToastContainer } from 'react-toastify'
+
 import type { Metadata } from 'next'
 import { Manrope } from 'next/font/google'
 
@@ -27,6 +29,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={manrope.className}>
         <StoreProvider>
+          <ToastContainer limit={1} />
           <MainLayout>{children}</MainLayout>
         </StoreProvider>
       </body>

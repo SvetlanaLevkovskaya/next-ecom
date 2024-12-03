@@ -15,6 +15,18 @@
   scrollbar-color: var(--scrollbar-thumb-bg) var(--scrollbar-track-bg);
 }
 
+input[type='file']::-webkit-file-upload-button {
+  @apply text-slate-400 bg-white border-none rounded-md pr-2 px-4 pl-0 mr-2 hover:text-slate-500 transition-all cursor-pointer;
+}
+
+.Toastify__toast--success .Toastify__progress-bar {
+  background-color: #14b8a6; /* teal-400 */
+}
+
+.Toastify__toast--error .Toastify__progress-bar {
+  background-color: #f43f5e; /* rose-400 */
+}
+
 @layer utilities {
   .text-balance {
     text-wrap: balance;

@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-import { Product } from '@/types'
+import { Product, ProductFormData } from '@/types'
 
 export const handleApiError = (error: unknown): string => {
   let errorMessage = 'Unexpected Error'
@@ -49,4 +49,9 @@ export async function getProduct(id: number): Promise<Product> {
 export async function deleteProductAPI(id: string): Promise<string> {
   await instanceAxios.delete(`/products/${id}`)
   return id
+}
+
+export async function createProduct(data: ProductFormData): Promise<Product> {
+  const response = await instanceAxios.post(`/products`, data)
+  return response.data
 }

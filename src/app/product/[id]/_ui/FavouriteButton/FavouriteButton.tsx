@@ -21,7 +21,7 @@ export const FavouriteButton = ({ id }: OptionalProduct) => {
       aria-label="Toggle Favourite"
       onClick={() => dispatch(toggleFavourite(String(id)))}
     >
-      <span>{isFavored ? 'Remove from Favourite' : 'Add to Favourite'}</span>
+      <span>{isFavored ? 'Remove from Favourite' : 'Make Favourite'}</span>
       <FaHeart
         size={20}
         className={clsx('text-gray-300 cursor-pointer transition-all', {

@@ -14,7 +14,6 @@ export function DataInitializer() {
   useEffect(() => {
     if (isFetching.current) return
 
-    console.log('Инициализация данных: запрос продуктов')
     isFetching.current = true
 
     const savedFavourites = localStorage.getItem('favourites')

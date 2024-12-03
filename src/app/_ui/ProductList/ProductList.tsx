@@ -20,7 +20,6 @@ export const ProductList = ({ initialProducts }: { initialProducts: Product[] })
 
   const dispatch = useAppDispatch()
   const filteredItems = useAppSelector(selectFilteredProducts)
-  const { isLoading, error } = useAppSelector((state) => state.products)
 
   useEffect(() => {
     if (initialProducts.length) {
@@ -28,19 +27,12 @@ export const ProductList = ({ initialProducts }: { initialProducts: Product[] })
     }
   }, [dispatch, initialProducts])
 
-  console.log('Filtered items:', filteredItems)
-  console.log(
-    'Redux state:',
-    useAppSelector((state) => state.products.products)
-  )
-
-  if (isLoading) {
-    return <Spinner />
-  }
-
-  if (error) {
-    return <div>Error: {error}</div>
-  }
+  if (!filteredItems.length)
+    return (
+      <div className="absolute inset-0 flex-center-center">
+        <Spinner />
+      </div>
+    )
 
   return (
     <div
@@ -52,10 +44,6 @@ export const ProductList = ({ initialProducts }: { initialProducts: Product[] })
         <Breadcrumb items={breadcrumbs} className="mb-10" />
         <h1 className="text-xl font-medium mb-6">Catalog</h1>
         <SortSelect />
-        {!filteredItems.length && (
-          <div className="text-center text-sm mt-4">No products available.</div>
-        )}
-
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 mt-4">
           {filteredItems.map((product) => (
             <ProductCard key={product.id} {...product} />

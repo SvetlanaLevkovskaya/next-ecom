@@ -26,4 +26,12 @@ export type BreadcrumbItem = {
   path?: string
 }
 
-export type SortOrder = 'asc' | 'desc'
+export type SortOrderType = 'asc' | 'desc'
+
+export type ProductFormData = {
+  title: string
+  price: number
+  description: string
+  image?: File | null
+  category: string
+}
