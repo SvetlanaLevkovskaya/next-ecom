@@ -36,7 +36,7 @@ const favouritesSlice = createSlice({
 })
 
 export const selectFavouriteProducts = createSelector(
-  (state: RootState) => state.products.items,
+  (state: RootState) => state.products.products,
   (state: RootState) => state.favourites.items,
   (products, favourites) => products.filter(({ id }) => favourites[id])
 )

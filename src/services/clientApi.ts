@@ -45,3 +45,8 @@ export async function getProduct(id: number): Promise<Product> {
   const response = await instanceAxios.get(`/products/${id}`)
   return response.data
 }
+
+export async function deleteProductAPI(id: string): Promise<string> {
+  await instanceAxios.delete(`/products/${id}`)
+  return id
+}

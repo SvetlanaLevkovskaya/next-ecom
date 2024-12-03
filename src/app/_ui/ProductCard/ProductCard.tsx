@@ -4,6 +4,7 @@ import { memo } from 'react'
 
 import Link from 'next/link'
 
+import { DeleteIcon } from '@/app/_ui/DeleteIcon/DeleteIcon'
 import { FavouriteIcon } from '@/app/_ui/FavouriteIcon/FavouriteIcon'
 import { ProductCardImage } from '@/app/_ui/ProductCardImage/ProductCardImage'
 import { OptionalProduct } from '@/types'
@@ -21,6 +22,8 @@ const ProductCardComponent = ({ id, title, image, category, price }: OptionalPro
       <h3 className="text-sm font-medium  min-h-10">{displayedTitle}</h3>
 
       <FavouriteIcon id={String(id)} />
+      <DeleteIcon id={String(id)} />
+
       <ProductCardImage title={title} image={image} />
 
       <p className="text-2xl font-black text-gray-900">
