@@ -32,6 +32,10 @@ const favouritesSlice = createSlice({
         state.items[productId] = true
       }
     },
+    removeFavourites: (state, action: PayloadAction<string>) => {
+      const productId = action.payload
+      delete state.items[productId]
+    },
   },
 })
 
@@ -41,5 +45,5 @@ export const selectFavouriteProducts = createSelector(
   (products, favourites) => products.filter(({ id }) => favourites[id])
 )
 
-export const { setFavourites, toggleFavourite } = favouritesSlice.actions
+export const { setFavourites, toggleFavourite, removeFavourites } = favouritesSlice.actions
 export default favouritesSlice.reducer

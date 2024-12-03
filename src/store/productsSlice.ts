@@ -3,7 +3,7 @@ import { createSelector } from 'reselect'
 
 import { deleteProductAPI } from '@/services/clientApi'
 
-import { toggleFavourite } from '@/store/favouritesSlice'
+import { removeFavourites } from '@/store/favouritesSlice'
 import { RootState } from '@/store/store'
 
 import { Product, SortOrderType } from '@/types'
@@ -31,7 +31,7 @@ export const deleteProduct = createAsyncThunk(
   async (id: string, { rejectWithValue, dispatch }) => {
     try {
       await deleteProductAPI(id)
-      dispatch(toggleFavourite(id))
+      dispatch(removeFavourites(id))
       return id
     } catch (error) {
       return rejectWithValue(`Failed to delete product: ${error}`)
