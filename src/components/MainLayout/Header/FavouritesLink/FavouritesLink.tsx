@@ -7,11 +7,13 @@ import { useAppSelector } from '@/store/store'
 
 export const FavouritesLink = () => {
   const favourites = useAppSelector((state) => state.favourites.items)
+
+  console.log('favourites', favourites)
   return (
-    <Link href="/favourite" passHref className="flex flex-col items-center gap-[1px]">
+    <Link href="/favourite" className="flex flex-col items-center gap-[1px]">
       <FaHeart
         className={clsx('text-gray-300 cursor-pointer transition-all hover:scale-110', {
-          'text-red-500': Object.keys(favourites).length > 0,
+          'text-rose-500': Object.keys(favourites).length > 0,
         })}
       />
       <span className="hidden md:block text-sm text-gray-700">Favourite</span>

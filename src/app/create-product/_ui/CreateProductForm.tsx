@@ -1,6 +1,6 @@
 'use client'
 
-import { ChangeEvent, useState } from 'react'
+import { ChangeEvent, KeyboardEvent, useState } from 'react'
 import { FormProvider, SubmitHandler, useForm } from 'react-hook-form'
 import { FaRegTimesCircle } from 'react-icons/fa'
 
@@ -8,11 +8,11 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import clsx from 'clsx'
 import * as yup from 'yup'
 
-import { customToastError, customToastSuccess } from '@/components/CustomToast/CustomToast'
+import { customToastError, customToastSuccess } from '@/components/ui/CustomToast/CustomToast'
 
 import { createProduct } from '@/services/clientApi'
 
-import { CategorySelect } from '@/app/create-product/ui/CategorySelect'
+import { CategorySelect } from '@/app/create-product/_ui/CategorySelect'
 import { ImageWithFallback, Spinner } from '@/components'
 import { setProducts, useAppDispatch, useAppSelector } from '@/store'
 import { ProductFormData } from '@/types'
@@ -35,7 +35,7 @@ const schema = yup.object().shape({
   category: yup.string().required('Category is required'),
 })
 
-export const CreateProduct = () => {
+export const CreateProductForm = () => {
   const [previewImage, setPreviewImage] = useState<string | null>(null)
   const [isFocused, setIsFocused] = useState<boolean>(false)
   const [inputKey, setInputKey] = useState<number>(Date.now())
@@ -85,11 +85,22 @@ export const CreateProduct = () => {
     }
   }
 
+  const handleKeyDown = (e: KeyboardEvent<HTMLFormElement>) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault()
+      handleSubmit(onSubmit)()
+    }
+  }
+
   return (
     <div className="max-w-md mx-auto mt-10 p-4 border rounded min-w-80">
       <h1 className="text-lg font-bold mb-4">Create New Product (testing Redux)</h1>
       <FormProvider {...formMethods}>
-        <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          className="flex flex-col gap-4"
+          onKeyDown={handleKeyDown}
+        >
           <div>
             <input
               {...register('title')}

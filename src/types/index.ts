@@ -13,7 +13,7 @@ export interface Product {
   rating: Rate
 }
 
-export type OptionalProduct = Partial<Product>
+export type PartialProduct = Partial<Product>
 
 export type Params = {
   params: {

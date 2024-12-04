@@ -2,9 +2,9 @@
 
 import { useEffect, useMemo } from 'react'
 
-import { ProductCard } from '@/app/_ui'
-import { FilterSection } from '@/app/_ui/FilterSection/FilterSection'
-import { SortSelect } from '@/app/_ui/SortSelect/SortSelect'
+import { ProductCard } from '@/app/(home)'
+import { FilterSection } from '@/app/(home)/FilterSection/FilterSection'
+import { SortSelect } from '@/app/(home)/SortSelect/SortSelect'
 import { Breadcrumb, Spinner } from '@/components'
 import { useBreadcrumbs } from '@/hooks'
 import { selectFilteredProducts, setProducts, useAppDispatch, useAppSelector } from '@/store'

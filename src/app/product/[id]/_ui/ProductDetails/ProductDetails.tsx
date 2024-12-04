@@ -5,9 +5,9 @@ import { useMemo } from 'react'
 import { FavouriteButton, ProductImage, ProductInfo, PurchaseSection } from '@/app/product/[id]/_ui'
 import { Breadcrumb } from '@/components'
 import { useBreadcrumbs } from '@/hooks'
-import { BreadcrumbItem, OptionalProduct } from '@/types'
+import { BreadcrumbItem, PartialProduct } from '@/types'
 
-export const ProductDetails = ({ product }: { product: OptionalProduct }) => {
+export const ProductDetails = ({ product }: { product: PartialProduct }) => {
   const { id, title, image, description, price, rating } = product
   const breadcrumbs: BreadcrumbItem[] = useMemo(
     () => [{ title: 'Main', path: '/' }, { title: 'Catalog', path: '/' }, { title }],
@@ -36,7 +36,7 @@ export const ProductDetails = ({ product }: { product: OptionalProduct }) => {
             <div>
               <div className="flex flex-col md:flex-row justify-between gap-4">
                 <ProductInfo title={title} rating={rating} />
-                <FavouriteButton id={id} />
+                <FavouriteButton id={String(id)} />
               </div>
             </div>
 

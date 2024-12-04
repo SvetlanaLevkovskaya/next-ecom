@@ -42,7 +42,13 @@ const favouritesSlice = createSlice({
 export const selectFavouriteProducts = createSelector(
   (state: RootState) => state.products.products,
   (state: RootState) => state.favourites.items,
-  (products, favourites) => products.filter(({ id }) => favourites[id])
+  (state: RootState) => state.products.isLoading,
+  (products, favourites, isLoading) => {
+    console.log('products - selectFavouriteProducts', products)
+    console.log('favourites - selectFavouriteProducts', favourites)
+    if (isLoading || !products || products.length === 0) return []
+    return products.filter(({ id }) => favourites[id])
+  }
 )
 
 export const { setFavourites, toggleFavourite, removeFavourites } = favouritesSlice.actions

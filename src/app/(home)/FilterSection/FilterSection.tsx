@@ -1,6 +1,6 @@
 import { ChangeEvent, memo } from 'react'
 
-import { CATEGORIES } from '@/app/_ui'
+import { CATEGORIES } from '@/app/(home)'
 import { setSelectedCategories, useAppDispatch, useAppSelector } from '@/store'
 
 const FilterSectionComponent = () => {

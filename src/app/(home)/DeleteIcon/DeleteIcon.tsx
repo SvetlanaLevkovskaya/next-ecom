@@ -26,7 +26,7 @@ export const DeleteIcon = ({ id }: { id: string }) => {
       onClick={handleDelete}
     >
       <FaRegTimesCircle
-        className={clsx('text-gray-300 cursor-pointer transition-all hover:scale-110', {})}
+        className={clsx('text-gray-300 cursor-pointer transition-all hover:scale-110')}
       />
     </button>
   )

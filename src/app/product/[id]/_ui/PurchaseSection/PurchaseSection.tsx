@@ -1,6 +1,8 @@
-import { OptionalProduct } from '@/types'
+'use client'
 
-export const PurchaseSection = ({ description, price }: OptionalProduct) => {
+import { PartialProduct } from '@/types'
+
+export const PurchaseSection = ({ description, price }: PartialProduct) => {
   if (!description || !price) return null
   return (
     <div>

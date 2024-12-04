@@ -3,7 +3,7 @@
 import { memo, useEffect, useRef, useState } from 'react'
 import { useFormContext } from 'react-hook-form'
 
-import { CATEGORIES } from '@/app/_ui'
+import { CATEGORIES } from '@/app/(home)'
 import { ArrowIcon } from '@/components'
 
 const CategorySelectComponent = () => {
@@ -51,17 +51,18 @@ const CategorySelectComponent = () => {
       </div>
       {isOpen && (
         <ul className="absolute top-full left-0 w-full bg-white rounded border-[2px] shadow-2xl z-10">
-          {CATEGORIES.map((category, index) => (
-            <li
-              key={category}
-              onClick={() => handleCategoryChange(category)}
-              className={`py-2 px-4 cursor-pointer hover:bg-orange-100  ${
-                selectedCategory === category ? 'bg-teal-50' : ''
-              } ${index === 0 ? 'rounded-t' : index === CATEGORIES.length - 1 ? 'rounded-b' : ''}`}
-            >
-              {category}
-            </li>
-          ))}
+          {CATEGORIES &&
+            CATEGORIES.map((category, index) => (
+              <li
+                key={category}
+                onClick={() => handleCategoryChange(category)}
+                className={`py-2 px-4 cursor-pointer hover:bg-orange-100  ${
+                  selectedCategory === category ? 'bg-teal-50' : ''
+                } ${index === 0 ? 'rounded-t' : index === CATEGORIES.length - 1 ? 'rounded-b' : ''}`}
+              >
+                {category}
+              </li>
+            ))}
         </ul>
       )}
     </div>

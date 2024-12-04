@@ -1,7 +1,9 @@
-import { ImageWithFallback } from '@/components'
-import { OptionalProduct } from '@/types'
+'use client'
 
-export const ProductImage = ({ image, title }: OptionalProduct) => {
+import { ImageWithFallback } from '@/components'
+import { PartialProduct } from '@/types'
+
+export const ProductImage = ({ image, title }: PartialProduct) => {
   return (
     <div className="w-[206px] h-[256px] flex justify-center items-center flex-shrink-0 my-10">
       <ImageWithFallback

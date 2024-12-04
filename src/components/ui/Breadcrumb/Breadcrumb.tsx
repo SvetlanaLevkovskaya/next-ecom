@@ -1,3 +1,5 @@
+'use client'
+
 import { Fragment, memo } from 'react'
 
 import clsx from 'clsx'

@@ -4,13 +4,13 @@ import { memo } from 'react'
 
 import Link from 'next/link'
 
-import { DeleteIcon } from '@/app/_ui/DeleteIcon/DeleteIcon'
-import { FavouriteIcon } from '@/app/_ui/FavouriteIcon/FavouriteIcon'
-import { ProductCardImage } from '@/app/_ui/ProductCardImage/ProductCardImage'
-import { OptionalProduct } from '@/types'
+import { DeleteIcon } from '@/app/(home)/DeleteIcon/DeleteIcon'
+import { FavouriteIcon } from '@/app/(home)/FavouriteIcon/FavouriteIcon'
+import { ProductCardImage } from '@/app/(home)/ProductCardImage/ProductCardImage'
+import { PartialProduct } from '@/types'
 import { truncateTitle } from '@/utils'
 
-const ProductCardComponent = ({ id, title, image, category, price }: OptionalProduct) => {
+const ProductCardComponent = ({ id, title, image, category, price }: PartialProduct) => {
   if (!id || !title || !image || !category || price == null) return null
   const displayedTitle = truncateTitle(title, 30)
   return (

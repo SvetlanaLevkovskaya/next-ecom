@@ -1,9 +1,9 @@
-import { CreateProduct } from '@/app/create-product/ui/CreateProduct'
+import { CreateProductForm } from '@/app/create-product/_ui/CreateProductForm'
 
 export async function generateMetadata() {
   return { title: `Create Product` }
 }
 
 export default function CreateProductPage() {
-  return <CreateProduct />
+  return <CreateProductForm />
 }

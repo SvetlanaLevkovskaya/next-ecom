@@ -1,6 +1,6 @@
 import { getProducts } from '@/services/clientApi'
 
-import { ProductList } from '@/app/_ui'
+import { ProductList } from '@/app/(home)'
 
 export default async function Home() {
   const products = await getProducts()

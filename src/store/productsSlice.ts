@@ -55,6 +55,13 @@ const productsSlice = createSlice({
     setSelectedCategories: (state, { payload }: PayloadAction<string[]>) => {
       state.selectedCategories = payload
     },
+    setLoading: (state, { payload }: PayloadAction<boolean>) => {
+      state.isLoading = payload
+    },
+    setError: (state, { payload }: PayloadAction<string | null>) => {
+      state.error = payload
+      state.isLoading = false
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(deleteProduct.pending, (state) => {
@@ -94,6 +101,12 @@ export const selectFilteredProducts = createSelector(
   }
 )
 
-export const { setProducts, setSearchQuery, setSortOrder, setSelectedCategories } =
-  productsSlice.actions
+export const {
+  setProducts,
+  setSearchQuery,
+  setSortOrder,
+  setSelectedCategories,
+  setLoading,
+  setError,
+} = productsSlice.actions
 export default productsSlice.reducer

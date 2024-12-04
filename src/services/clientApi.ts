@@ -46,9 +46,8 @@ export async function getProduct(id: number): Promise<Product> {
   return response.data
 }
 
-export async function deleteProductAPI(id: string): Promise<string> {
+export async function deleteProductAPI(id: string): Promise<void> {
   await instanceAxios.delete(`/products/${id}`)
-  return id
 }
 
 export async function createProduct(data: ProductFormData): Promise<Product> {

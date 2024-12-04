@@ -1,7 +1,9 @@
-import { OptionalProduct } from '@/types'
+'use client'
+
+import { PartialProduct } from '@/types'
 import { getStarIcons } from '@/utils'
 
-export const ProductInfo = ({ title, rating }: OptionalProduct) => {
+export const ProductInfo = ({ title, rating }: PartialProduct) => {
   if (!title || !rating) return null
   return (
     <div>

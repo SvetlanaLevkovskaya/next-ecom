@@ -4,11 +4,7 @@ import clsx from 'clsx'
 
 import { toggleFavourite, useAppDispatch, useAppSelector } from '@/store'
 
-interface FavouriteIconProps {
-  id: string
-}
-
-export const FavouriteIcon = ({ id }: FavouriteIconProps) => {
+export const FavouriteIcon = ({ id }: { id: string }) => {
   const dispatch = useAppDispatch()
   const isFavored = useAppSelector((state) => state.favourites.items[id])
 
@@ -26,7 +22,7 @@ export const FavouriteIcon = ({ id }: FavouriteIconProps) => {
     >
       <FaHeart
         className={clsx('text-gray-300 cursor-pointer transition-all hover:scale-110', {
-          'text-red-500': isFavored,
+          'text-rose-500': isFavored,
         })}
       />
     </button>
