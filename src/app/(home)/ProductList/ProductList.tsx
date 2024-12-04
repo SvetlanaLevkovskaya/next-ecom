@@ -1,16 +1,16 @@
 'use client'
 
-import { useEffect, useMemo } from 'react'
+import { useMemo } from 'react'
 
 import { ProductCard } from '@/app/(home)'
 import { FilterSection } from '@/app/(home)/FilterSection/FilterSection'
 import { SortSelect } from '@/app/(home)/SortSelect/SortSelect'
 import { Breadcrumb, Spinner } from '@/components'
 import { useBreadcrumbs } from '@/hooks'
-import { selectFilteredProducts, setProducts, useAppDispatch, useAppSelector } from '@/store'
-import { BreadcrumbItem, Product } from '@/types'
+import { selectFilteredProducts, useAppSelector } from '@/store'
+import { BreadcrumbItem } from '@/types'
 
-export const ProductList = ({ initialProducts }: { initialProducts: Product[] }) => {
+export const ProductList = () => {
   const breadcrumbs: BreadcrumbItem[] = useMemo(
     () => [{ title: 'Main', path: '/' }, { title: 'Catalog' }],
     []
@@ -18,14 +18,7 @@ export const ProductList = ({ initialProducts }: { initialProducts: Product[] })
 
   useBreadcrumbs(breadcrumbs)
 
-  const dispatch = useAppDispatch()
   const filteredItems = useAppSelector(selectFilteredProducts)
-
-  useEffect(() => {
-    if (initialProducts.length) {
-      dispatch(setProducts(initialProducts))
-    }
-  }, [dispatch, initialProducts])
 
   if (!filteredItems.length)
     return (

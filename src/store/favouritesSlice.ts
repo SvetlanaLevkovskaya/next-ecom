@@ -44,8 +44,6 @@ export const selectFavouriteProducts = createSelector(
   (state: RootState) => state.favourites.items,
   (state: RootState) => state.products.isLoading,
   (products, favourites, isLoading) => {
-    console.log('products - selectFavouriteProducts', products)
-    console.log('favourites - selectFavouriteProducts', favourites)
     if (isLoading || !products || products.length === 0) return []
     return products.filter(({ id }) => favourites[id])
   }

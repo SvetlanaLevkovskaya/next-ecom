@@ -26,8 +26,6 @@ export function DataInitializer() {
     isFetching.current = true
 
     const savedFavourites = localStorage.getItem('favourites')
-
-    console.log('savedFavourites', savedFavourites)
     if (savedFavourites) {
       dispatch(setFavourites(JSON.parse(savedFavourites)))
     }

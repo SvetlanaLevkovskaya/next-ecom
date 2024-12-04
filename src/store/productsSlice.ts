@@ -15,6 +15,7 @@ interface ProductsState {
   selectedCategories: string[]
   isLoading: boolean
   error: string | null
+  isInitialized: boolean
 }
 
 const initialState: ProductsState = {
@@ -24,6 +25,7 @@ const initialState: ProductsState = {
   selectedCategories: [],
   isLoading: false,
   error: null,
+  isInitialized: true,
 }
 
 export const deleteProduct = createAsyncThunk(
@@ -45,6 +47,7 @@ const productsSlice = createSlice({
   reducers: {
     setProducts: (state, { payload }: PayloadAction<Product[]>) => {
       state.products = payload
+      state.isInitialized = false
     },
     setSearchQuery: (state, { payload }: PayloadAction<string>) => {
       state.searchQuery = payload

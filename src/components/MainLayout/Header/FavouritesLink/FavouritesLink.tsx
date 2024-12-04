@@ -7,8 +7,6 @@ import { useAppSelector } from '@/store/store'
 
 export const FavouritesLink = () => {
   const favourites = useAppSelector((state) => state.favourites.items)
-
-  console.log('favourites', favourites)
   return (
     <Link href="/favourite" className="flex flex-col items-center gap-[1px]">
       <FaHeart
