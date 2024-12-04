@@ -11,9 +11,6 @@ export const FavouriteDetails = () => {
 
   const formattedItemsText = getPluralisedItemsText(favouriteProducts.length)
 
-  console.log('isLoading', isInitialized)
-  console.log('favouriteProducts', favouriteProducts)
-
   if (isInitialized)
     return (
       <div className="absolute inset-0 flex-center-center">
