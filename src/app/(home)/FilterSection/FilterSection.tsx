@@ -20,19 +20,21 @@ const FilterSectionComponent = () => {
       <h2 className="text-base font-medium mb-8">Filters</h2>
       {CATEGORIES &&
         CATEGORIES.map((category) => (
-          <div key={category} className="flex items-center mb-2 text-sm transition-all">
+          <label
+            key={category}
+            htmlFor={category}
+            className="flex items-center mb-2 text-sm cursor-pointer transition-all hover:bg-slate-100 rounded px-2 py-1"
+          >
             <input
               type="checkbox"
               value={category}
               id={category}
               onChange={handleCategoryChange}
               checked={selectedCategories.includes(category)}
-              className="mr-2 h-3 w-3 accent-yellow-500 focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500 transition-all hover:scale-110"
+              className="mr-2 h-3 w-3 accent-yellow-500 transition-all hover:scale-110"
             />
-            <label htmlFor={category} className="text-sm">
-              {category}
-            </label>
-          </div>
+            {category}
+          </label>
         ))}
     </aside>
   )
