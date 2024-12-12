@@ -5,12 +5,13 @@ import { useMemo } from 'react'
 import { ProductCard } from '@/app/(home)'
 import { FilterSection } from '@/app/(home)/FilterSection/FilterSection'
 import { SortSelect } from '@/app/(home)/SortSelect/SortSelect'
-import { Breadcrumb, Spinner } from '@/components'
+import { Breadcrumb } from '@/components'
 import { useBreadcrumbs } from '@/hooks'
 import { selectFilteredProducts, useAppSelector } from '@/store'
 import { BreadcrumbItem } from '@/types'
 
 export const ProductList = () => {
+  const isInitialized = useAppSelector((state) => state.products.isInitialized)
   const breadcrumbs: BreadcrumbItem[] = useMemo(
     () => [{ title: 'Main', path: '/' }, { title: 'Catalog' }],
     []
@@ -19,13 +20,6 @@ export const ProductList = () => {
   useBreadcrumbs(breadcrumbs)
 
   const filteredItems = useAppSelector(selectFilteredProducts)
-
-  if (!filteredItems.length)
-    return (
-      <div className="absolute inset-0 flex-center-center">
-        <Spinner />
-      </div>
-    )
 
   return (
     <div
@@ -41,6 +35,7 @@ export const ProductList = () => {
           {filteredItems.map((product) => (
             <ProductCard key={product.id} {...product} />
           ))}
+          {!isInitialized && !filteredItems.length && <>Products not found</>}
         </div>
       </section>
     </div>

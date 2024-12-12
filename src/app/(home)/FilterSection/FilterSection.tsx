@@ -23,7 +23,7 @@ const FilterSectionComponent = () => {
           <label
             key={category}
             htmlFor={category}
-            className="flex items-center mb-2 text-sm cursor-pointer transition-all hover:bg-slate-100 rounded px-2 py-1"
+            className="flex items-center mb-2 text-sm cursor-pointer transition-all hover:bg-gray-100 rounded px-2 py-1"
           >
             <input
               type="checkbox"
@@ -31,9 +31,12 @@ const FilterSectionComponent = () => {
               id={category}
               onChange={handleCategoryChange}
               checked={selectedCategories.includes(category)}
-              className="mr-2 h-3 w-3 accent-yellow-500 transition-all hover:scale-110"
+              className="hidden peer"
             />
-            {category}
+            <span className="w-4 h-4 border border-gray-500 rounded flex items-center justify-center peer-checked:bg-yellow-500 peer-checked:border-yellow-500">
+              ✓
+            </span>
+            <span className="ml-2">{category}</span>
           </label>
         ))}
     </aside>
