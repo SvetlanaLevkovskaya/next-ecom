@@ -1,8 +1,7 @@
-import { getProducts } from '@/services/clientApi'
+'use client'
 
 import { ProductList } from '@/app/(home)'
 
-export default async function Home() {
-  await getProducts()
+export default function Home() {
   return <ProductList />
 }
